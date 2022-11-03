@@ -1,13 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROJECT Explorer", "PROJECT Explorer\PROJECT Explorer.csproj", "{002CE4AC-AE3F-4D6E-AF26-2B91CBF37500}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROJECT Tests Manager", "PROJECT Tests Manager\PROJECT Tests Manager.csproj", "{D18DCFB0-1B66-4368-B030-D3F36C1A7BAD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROJECT App Control", "PROJECT App Control\PROJECT App Control.csproj", "{6C5D664B-B976-46D0-BD19-A756261243D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +21,11 @@ Global
 		{D18DCFB0-1B66-4368-B030-D3F36C1A7BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D18DCFB0-1B66-4368-B030-D3F36C1A7BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D18DCFB0-1B66-4368-B030-D3F36C1A7BAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C5D664B-B976-46D0-BD19-A756261243D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C5D664B-B976-46D0-BD19-A756261243D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C5D664B-B976-46D0-BD19-A756261243D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C5D664B-B976-46D0-BD19-A756261243D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFA12DC6-9F2A-46F1-AD04-6633CAFC5079}
 	EndGlobalSection
 EndGlobal
