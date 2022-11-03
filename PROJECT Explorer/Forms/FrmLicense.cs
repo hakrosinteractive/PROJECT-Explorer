@@ -1,8 +1,8 @@
-﻿using HAKROS.Classes;
+using HAKROS.Classes;
 using System;
 using System.Windows.Forms;
 
-namespace AIRBUS.Forms
+namespace HAKROS.Forms
 {
     public partial class FrmLicense : Form
     {
