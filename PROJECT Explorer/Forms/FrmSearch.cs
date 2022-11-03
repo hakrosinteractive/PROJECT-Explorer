@@ -81,36 +81,6 @@ namespace HAKROS.Forms
             }
         }
 
-        private bool CheckCtrlKey()
-        {
-            return ((ModifierKeys & Keys.Control) == Keys.Control);
-        }
-
-        private bool CheckShiftKey()
-        {
-            return ((ModifierKeys & Keys.Shift) == Keys.Shift);
-        }
-
-        private bool CheckAltKey()
-        {
-            return ((ModifierKeys & Keys.Alt) == Keys.Alt);
-        }
-
-        private bool CheckScrollKey()
-        {
-            return (IsKeyLocked(Keys.Scroll));
-        }
-
-        private bool CheckNumLockKey()
-        {
-            return (IsKeyLocked(Keys.NumLock));
-        }
-
-        private bool CheckCapsLockKey()
-        {
-            return (IsKeyLocked(Keys.CapsLock));
-        }
-
         private void SetHighPriority()
         {
             try
@@ -790,8 +760,8 @@ namespace HAKROS.Forms
             if (dgv != null && dgv.ColumnCount > 0)
             {
                 dgv.Columns[0].Visible = false;
-                dgv.Columns[1].Visible = (WindowState == FormWindowState.Maximized);
-                dgv.Columns[2].Visible = (WindowState == FormWindowState.Maximized);
+                dgv.Columns[1].Visible = WindowState == FormWindowState.Maximized;
+                dgv.Columns[2].Visible = WindowState == FormWindowState.Maximized;
                 dgv.Columns[3].Visible = true;
                 dgv.Columns[4].Visible = true;
                 dgv.Columns[5].Visible = true;
@@ -895,7 +865,7 @@ namespace HAKROS.Forms
 
         private void CheckCancelation()
         {
-            ElapsedTimeToCancel = (CheckCtrlKey() && CheckAltKey() && CheckShiftKey()) ? ElapsedTimeToCancel + 1 : 0;
+            ElapsedTimeToCancel = (ClassKeyControl.CheckCtrlKey() && ClassKeyControl.CheckAltKey() && ClassKeyControl.CheckShiftKey()) ? ElapsedTimeToCancel + 1 : 0;
             if (ElapsedTimeToCancel > 1 && !cts.IsCancellationRequested)
             {
                 cts.Cancel();
@@ -980,7 +950,7 @@ namespace HAKROS.Forms
                                 }
                                 else
                                 {
-                                    var filesearch = (onFilename) ? filenamelower : filepathlower;
+                                    var filesearch = onFilename ? filenamelower : filepathlower;
 
                                     if (ContainsTerms(filesearch, include, sameLine, allTerms))
                                     {
@@ -1100,7 +1070,7 @@ namespace HAKROS.Forms
                     }
                     else
                     {
-                        containsTerm = (OpcFilterPath.Checked) ? filepathlower.Contains(term) : filenamelower.Contains(term);
+                        containsTerm = OpcFilterPath.Checked ? filepathlower.Contains(term) : filenamelower.Contains(term);
                     }
                     arrayBoolExclude.Add(containsTerm);
                 }
@@ -1116,7 +1086,7 @@ namespace HAKROS.Forms
                     }
                     else
                     {
-                        containsTerm = (OpcFilterPath.Checked) ? filepathlower.Contains(term) : filenamelower.Contains(term);
+                        containsTerm = OpcFilterPath.Checked ? filepathlower.Contains(term) : filenamelower.Contains(term);
                     }
                     arrayBoolInclude.Add(containsTerm);
                 }
@@ -1187,7 +1157,7 @@ namespace HAKROS.Forms
                         indexes = GetIndexesForQuery(input, OpcWholeWord.Checked, qry);
                     }
                 }
-                result = (indexes.Count > 0);
+                result = indexes.Count > 0;
 
                 if (result && allTerms)
                 {
@@ -1234,7 +1204,7 @@ namespace HAKROS.Forms
                     {
                         //Error !!
                     }
-                    result = (validlines.Count > 0);
+                    result = validlines.Count > 0;
                 }
 
             }
@@ -1358,7 +1328,7 @@ namespace HAKROS.Forms
         private void EvalGUI()
         {
 
-            tbc.Visible = (tbc.TabCount > 0);
+            tbc.Visible = tbc.TabCount > 0;
 
             tSolutions.Text = "Solutions (" + ListSolutions.Items.Count + ")";
             tProjects.Text = "Projects (" + ListProjects.Items.Count + ")";
@@ -1373,7 +1343,7 @@ namespace HAKROS.Forms
             else
             {
                 ClassStyle.ApplyStyle(ListQueries);
-                ListQueries.ForeColor = (IsLight()) ? Color.Red : Color.Yellow;
+                ListQueries.ForeColor = IsLight() ? Color.Red : Color.Yellow;
             }
 
             tResults.Text = (dgv != null) ? "Results (" + dgv.Rows.Count + ")" : "Results (0)";
@@ -1445,15 +1415,15 @@ namespace HAKROS.Forms
             sep7.Visible = dgvVisible;
             sep8.Visible = dgvVisible;
 
-            ListQueries.Enabled = (ListQueries.Items.Count > 0);
-            LinkCloseQuery.Visible = (ListQueries.Items.Count > 0);
-            LnkPrevQuery.Visible = (ListQueries.Items.Count > 0);
-            LnkNextQuery.Visible = (ListQueries.Items.Count > 0);
-            sep9.Visible = (ListQueries.Items.Count > 0);
-            sep10.Visible = (ListQueries.Items.Count > 0);
+            ListQueries.Enabled = ListQueries.Items.Count > 0;
+            LinkCloseQuery.Visible = ListQueries.Items.Count > 0;
+            LnkPrevQuery.Visible = ListQueries.Items.Count > 0;
+            LnkNextQuery.Visible = ListQueries.Items.Count > 0;
+            sep9.Visible = ListQueries.Items.Count > 0;
+            sep10.Visible = ListQueries.Items.Count > 0;
 
-            LnkPrevQuery.Enabled = (ListQueries.SelectedIndex > 0);
-            LnkNextQuery.Enabled = (ListQueries.SelectedIndex < ListQueries.Items.Count - 1);
+            LnkPrevQuery.Enabled = ListQueries.SelectedIndex > 0;
+            LnkNextQuery.Enabled = ListQueries.SelectedIndex < ListQueries.Items.Count - 1;
 
             EvalCM();
 
@@ -1496,7 +1466,7 @@ namespace HAKROS.Forms
         {
             foreach (Control ctrl in PanelMain.Controls)
             {
-                ctrl.TabStop = (ctrl is TextBox);
+                ctrl.TabStop = ctrl is TextBox;
             }
         }
         
@@ -1519,18 +1489,18 @@ namespace HAKROS.Forms
 
             if (QuerySearchTypeByContent)
             {
-                DetailsBackColor = (IsLight()) ? Color.Firebrick : Color.Crimson;
-                DetailsForeColor = (IsLight()) ? Color.White : Color.White;
+                DetailsBackColor = IsLight() ? Color.Firebrick : Color.Crimson;
+                DetailsForeColor = IsLight() ? Color.White : Color.White;
             }
             else if (QuerySearchTypeByFullPath)
             {
-                DetailsBackColor = (IsLight()) ? Color.Green : Color.SpringGreen;
-                DetailsForeColor = (IsLight()) ? Color.White : Color.Black;
+                DetailsBackColor = IsLight() ? Color.Green : Color.SpringGreen;
+                DetailsForeColor = IsLight() ? Color.White : Color.Black;
             }
             else if (QuerySearchTypeByFileName)
             {
-                DetailsBackColor = (IsLight()) ? Color.Blue : Color.DodgerBlue;
-                DetailsForeColor = (IsLight()) ? Color.White : Color.White;
+                DetailsBackColor = IsLight() ? Color.Blue : Color.DodgerBlue;
+                DetailsForeColor = IsLight() ? Color.White : Color.White;
             }
 
             var go = new FrmSearchDetails(f, solution, project, query, OpcWholeWord.Checked, OpcIndividualTerms.Checked, OpcAllTerms.Checked, OpcSameLine.Checked, DetailsBackColor, DetailsForeColor);
@@ -1822,7 +1792,7 @@ namespace HAKROS.Forms
 
         private void txtSelection_TextChanged(object sender, EventArgs e)
         {
-            LnkClipboard.Visible = (txtSelection.Text != "");
+            LnkClipboard.Visible = txtSelection.Text != "";
         }
 
         private void OpcViewResults_Click(object sender, EventArgs e)
@@ -1918,8 +1888,8 @@ namespace HAKROS.Forms
 
         private void WarningRootNotDefined()
         {
-            ListFolders.BackColor = (IsLight()) ? Color.MistyRose : Color.Orange;
-            ListFolders.ForeColor = (IsLight()) ? Color.Black : Color.Black;
+            ListFolders.BackColor = IsLight() ? Color.MistyRose : Color.Orange;
+            ListFolders.ForeColor = IsLight() ? Color.Black : Color.Black;
             ClassGeneral.Message("Solution folder not found, you must define it before continue.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             ClassStyle.ApplyStyle(ListFolders);
         }
@@ -2054,8 +2024,8 @@ namespace HAKROS.Forms
             if (txtFilter.Text != "")
             {
 
-                var TypeFilter = (OpcFilterPath.Checked) ? "PATH" : "NAME";
-                var IncludeAll = (OpcFilterInclusive.Checked) ? "**" : "*";
+                var TypeFilter = OpcFilterPath.Checked ? "PATH" : "NAME";
+                var IncludeAll = OpcFilterInclusive.Checked ? "**" : "*";
 
                 var words = txtFilter.Text.ToLowerInvariant().Split(' ');
                 var finalFilter = "";
@@ -2134,9 +2104,9 @@ namespace HAKROS.Forms
                 DGVGridStyle(dgv);
                 DGVHeaderStyle(dgv);
 
-                dgv.BackgroundColor = (IsLight()) ? Color.Beige : ColorTranslator.FromHtml("#222222");
+                dgv.BackgroundColor = IsLight() ? Color.Beige : ColorTranslator.FromHtml("#222222");
 
-                var bg = (IsLight()) ? Color.Beige : ColorTranslator.FromHtml("#222222");
+                var bg = IsLight() ? Color.Beige : ColorTranslator.FromHtml("#222222");
                 var fc = GetRecommendedInverseColor(bg);
                 var selbg = GetSelectionBackcolor(bg);
                 var selfc = GetRecommendedInverseColor(selbg);
@@ -2323,7 +2293,7 @@ namespace HAKROS.Forms
                 if(tbc.TabCount > 1)
                 {
                     //Current tab
-                    var isCurrentTab = (tbc.SelectedIndex == i);
+                    var isCurrentTab = tbc.SelectedIndex == i;
                     //Remove arrays
                     ArrayDGVFilterOptions.RemoveAt(i);
                     ArrayDGVInclude.RemoveAt(i);
@@ -2419,8 +2389,8 @@ namespace HAKROS.Forms
 
         private void FastFilter(string term, bool include)
         {
-            var current = (include) ? "+" + term : "-" + term;
-            var reverse = (include) ? "-" + term : "+" + term;
+            var current = include ? "+" + term : "-" + term;
+            var reverse = include ? "-" + term : "+" + term;
 
             var filter = txtFilter.Text.Trim();
 
@@ -2741,7 +2711,7 @@ namespace HAKROS.Forms
 
         private bool DirectoryExists(string dir)
         {
-            return (Directory.Exists(dir) && (dir != "\\"));
+            return Directory.Exists(dir) && (dir != "\\");
         }
 
         private void BackupFile(string fullpath)
@@ -2795,7 +2765,7 @@ namespace HAKROS.Forms
         private void tcontrol_Tick(object sender, EventArgs e)
         {
             
-            PanelBottom.BackColor = (IsLight()) ? Color.White : ColorTranslator.FromHtml("#333333");
+            PanelBottom.BackColor = IsLight() ? Color.White : ColorTranslator.FromHtml("#333333");
 
             if(Directory.Exists(ListFolders.Text))
             {
@@ -2804,25 +2774,25 @@ namespace HAKROS.Forms
                     if (ClassGeneral.BackupTotal > 0)
                     {
                         LblBackupStatus.Text = "Local backup is enabled [" + ClassGeneral.BackupTotal + "]";
-                        LblBackupStatus.LinkColor = (IsLight()) ? Color.Green : Color.SpringGreen;
+                        LblBackupStatus.LinkColor = IsLight() ? Color.Green : Color.SpringGreen;
                     }
                     else
                     {
                         LblBackupStatus.Text = "Local backup is enabled";
-                        LblBackupStatus.LinkColor = (IsLight()) ? Color.Green : Color.SpringGreen;
+                        LblBackupStatus.LinkColor = IsLight() ? Color.Green : Color.SpringGreen;
                     }
                 }
                 else
                 {
                     LblBackupStatus.Text = "Local backup is disabled";
-                    LblBackupStatus.LinkColor = (IsLight()) ? Color.Red : Color.Orange;
+                    LblBackupStatus.LinkColor = IsLight() ? Color.Red : Color.Orange;
                 }
 
             }
             else
             {
                 LblBackupStatus.Text = "Solution folder not found!";
-                LblBackupStatus.LinkColor = (IsLight()) ? Color.Red : Color.Orange;
+                LblBackupStatus.LinkColor = IsLight() ? Color.Red : Color.Orange;
                 
             }
 
@@ -2997,7 +2967,7 @@ namespace HAKROS.Forms
 
         private void DGVGridStyle(DataGridView dgv)
         {
-            dgv.GridColor = (IsLight()) ? Color.DimGray : ColorTranslator.FromHtml("#555555");
+            dgv.GridColor = IsLight() ? Color.DimGray : ColorTranslator.FromHtml("#555555");
         }
 
         private void DGVHeaderStyle(DataGridView dgv)
@@ -3026,13 +2996,13 @@ namespace HAKROS.Forms
             if (dgv != null)
             {
                 dgv.SuspendLayout();
-                dgv.BackgroundColor = (IsLight()) ? Color.Beige : ColorTranslator.FromHtml("#222222");
+                dgv.BackgroundColor = IsLight() ? Color.Beige : ColorTranslator.FromHtml("#222222");
                 DGVGridStyle(dgv);
                 DGVHeaderStyle(dgv);
                 var kr = 0;
                 while (kr < dgv.RowCount)
                 {
-                    var bg = (IsLight()) ? Color.Beige : ColorTranslator.FromHtml("#222222");
+                    var bg = IsLight() ? Color.Beige : ColorTranslator.FromHtml("#222222");
                     var fc = GetRecommendedInverseColor(bg);
                     var selbg = GetSelectionBackcolor(bg);
                     var selfc = GetRecommendedInverseColor(selbg);
@@ -3062,7 +3032,7 @@ namespace HAKROS.Forms
 
         private bool IsLight()
         {
-            return (ClassStyle.CurrentStyle == ClassStyle.StyleType.Light);
+            return ClassStyle.CurrentStyle == ClassStyle.StyleType.Light;
         }
 
         #region DataColors
@@ -3074,7 +3044,7 @@ namespace HAKROS.Forms
             var dc = new DataColors();
             dc.dgvname = "";
             dc.dgvfilepath = "";
-            dc.bgnormal = (IsLight()) ? Color.Beige : ColorTranslator.FromHtml("#222222");
+            dc.bgnormal = IsLight() ? Color.Beige : ColorTranslator.FromHtml("#222222");
             dc.bgselected = Color.Black;
             return dc;
         }
@@ -3255,7 +3225,7 @@ namespace HAKROS.Forms
                     ClassStyle.ApplyStyle(ctrl as Control);
                 }
 
-                MessageStatus.ForeColor = (IsLight()) ? Color.Black : Color.WhiteSmoke;
+                MessageStatus.ForeColor = IsLight() ? Color.Black : Color.WhiteSmoke;
 
                 Enabled = true;
 
@@ -3323,20 +3293,20 @@ namespace HAKROS.Forms
             {
                 e.DrawBackground();
 
-                bool isItemSelected = ((e.State & DrawItemState.Selected) == DrawItemState.Selected);
+                bool isItemSelected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
                 int itemIndex = e.Index;
                 if (itemIndex >= 0 && itemIndex < List.Items.Count)
                 {
                     Graphics g = e.Graphics;
 
                     // Background Color
-                    SolidBrush backgroundColorBrush = new SolidBrush((isItemSelected) ? List.ItemSelectionBackColor : List.ItemBackColor);
+                    SolidBrush backgroundColorBrush = new SolidBrush(isItemSelected ? List.ItemSelectionBackColor : List.ItemBackColor);
                     g.FillRectangle(backgroundColorBrush, e.Bounds);
 
                     // Set text color
                     string itemText = List.Items[itemIndex].ToString();
 
-                    SolidBrush itemTextColorBrush = (isItemSelected) ? new SolidBrush(List.ItemSelectionForeColor) : new SolidBrush(List.ItemForeColor);
+                    SolidBrush itemTextColorBrush = isItemSelected ? new SolidBrush(List.ItemSelectionForeColor) : new SolidBrush(List.ItemForeColor);
                     g.DrawString(itemText, e.Font, itemTextColorBrush, List.GetItemRectangle(itemIndex).Location);
 
                     // Clean up
@@ -3713,21 +3683,21 @@ namespace HAKROS.Forms
 
             if (OpcOnContent.Checked)
             {
-                SearchType.BackColor = (IsLight()) ? Color.Firebrick : Color.Crimson;
-                SearchType.ForeColor = (IsLight()) ? Color.White : Color.White;
-                SearchType.Text = (OpcHideSearchType) ? "" : "You are searching on file content";
+                SearchType.BackColor = IsLight() ? Color.Firebrick : Color.Crimson;
+                SearchType.ForeColor = IsLight() ? Color.White : Color.White;
+                SearchType.Text = OpcHideSearchType ? "" : "You are searching on file content";
             }
             else if (OpcOnFullpath.Checked)
             {
-                SearchType.BackColor = (IsLight()) ? Color.Green : Color.SpringGreen;
-                SearchType.ForeColor = (IsLight()) ? Color.White : Color.Black;
-                SearchType.Text = (OpcHideSearchType) ? "" : "You are searching on filepath";
+                SearchType.BackColor = IsLight() ? Color.Green : Color.SpringGreen;
+                SearchType.ForeColor = IsLight() ? Color.White : Color.Black;
+                SearchType.Text = OpcHideSearchType ? "" : "You are searching on filepath";
             }
             else if (OpcOnFilename.Checked)
             {
-                SearchType.BackColor = (IsLight()) ? Color.Blue : Color.DodgerBlue;
-                SearchType.ForeColor = (IsLight()) ? Color.White : Color.White;
-                SearchType.Text = (OpcHideSearchType) ? "" : "You are searching on filename";
+                SearchType.BackColor = IsLight() ? Color.Blue : Color.DodgerBlue;
+                SearchType.ForeColor = IsLight() ? Color.White : Color.White;
+                SearchType.Text = OpcHideSearchType ? "" : "You are searching on filename";
             }
 
         }
