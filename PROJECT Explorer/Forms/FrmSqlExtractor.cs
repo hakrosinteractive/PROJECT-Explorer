@@ -1,7 +1,6 @@
-﻿using HAKROS.Classes;
+using HAKROS.Classes;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ namespace HAKROS.Forms
     public partial class FrmSqlExtractor : Form
     {
 
-        string FolderMPRSSuite = "";
+        string FolderSuite = "";
 
         List<string> ListFilesPaths = new List<string>();
 
@@ -27,7 +26,7 @@ namespace HAKROS.Forms
         public FrmSqlExtractor(string _folderMprsSuite)
         {
             InitializeComponent();
-            FolderMPRSSuite = _folderMprsSuite;
+            FolderSuite = _folderMprsSuite;
         }
 
         private void BtnAnalyze_Click(object sender, EventArgs e)
@@ -37,7 +36,7 @@ namespace HAKROS.Forms
 
         private void SelectFiles()
         {
-            var dir = FolderMPRSSuite.ToLowerInvariant();
+            var dir = FolderSuite.ToLowerInvariant();
             if (!dir.EndsWith("\\script bbdd\\"))
             {
                 dir = dir + "script bbdd\\";
