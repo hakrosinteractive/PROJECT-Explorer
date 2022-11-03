@@ -105,12 +105,6 @@ namespace HAKROS.Classes
             return DirApp + "PROJECT Tests Manager.exe";
         }
 
-        static public string FileAppControl()
-        {
-            CreateDirs();
-            return DirApp + "PROJECT App Control.exe";
-        }
-
         static public string FileMicrosoftWindowsAPICodePack()
         {
             CreateDirs();
@@ -128,16 +122,6 @@ namespace HAKROS.Classes
             if(File.Exists(FileTestManager()))
             {
                 ClassExecute.ExecuteProcess(FileTestManager(), "", false);
-                return true;
-            }
-            return false;
-        }
-
-        static public bool LoadAppControl()
-        {
-            if(File.Exists(FileAppControl()))
-            {
-                ClassExecute.ExecuteProcess(FileAppControl(), "", false);
                 return true;
             }
             return false;
@@ -326,6 +310,29 @@ namespace HAKROS.Classes
                 var go = new FrmMessageBox(text, caption, winType);
                 return go.ShowDialog();
             }
+        }
+
+        static public bool CreateDesktopShortcut()
+        {
+            string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string shortcutFile = dir + "\\PROJECT Explorer.url";
+            try
+            {
+                using (StreamWriter wr = new StreamWriter(shortcutFile))
+                {
+                    string app = Assembly.GetExecutingAssembly().Location;
+                    wr.WriteLine("[InternetShortcut]");
+                    wr.WriteLine("URL=file:///" + app);
+                    wr.WriteLine("IconIndex=0");
+                    string icon = app.Replace('\\', '/');
+                    wr.WriteLine("IconFile=" + icon);
+                }
+            }
+            catch
+            {
+                //Error !!
+            }
+            return File.Exists(shortcutFile);
         }
 
     }
