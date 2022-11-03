@@ -8,9 +8,9 @@ What can be done with the program?
 - Search by name, path and content
 - For content search it is possible:
     
-    >> Search full phrases or stand-alone terms
-    >> Search all the terms in the same or different files.
-    >> Search in the same line for several terms that are not necessarily consecutive
+    - Search full phrases or stand-alone terms
+    - Search all the terms in the same or different files.
+    - Search in the same line for several terms that are not necessarily consecutive
 
 - Search filters by extension and/or keywords
 - Quick filters to automatically filter certain types of files (include/exclude).
