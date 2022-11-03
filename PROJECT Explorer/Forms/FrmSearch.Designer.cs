@@ -52,11 +52,9 @@ namespace HAKROS.Forms
             this.CMNicon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.CMenuAppControl = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
+            this.CMenuLocalBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.CMenuTestManager = new System.Windows.Forms.ToolStripMenuItem();
             this.CMenuSqlExtractor = new System.Windows.Forms.ToolStripMenuItem();
-            this.CMenuLocalBackup = new System.Windows.Forms.ToolStripMenuItem();
             this.CMenuSafeboard = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.MenuShow = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,6 +179,8 @@ namespace HAKROS.Forms
             this.Menu1_AutoscaleMode_1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu1_AutoscaleMode_2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu1_AutoscaleMode_3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.Menu1_CreateDesktopShortcut = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.Menu1_ExitApp = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuOffice = new System.Windows.Forms.ToolStripMenuItem();
@@ -243,11 +243,9 @@ namespace HAKROS.Forms
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.Menu5_SystemProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.sPECIALTOOLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.appControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.MenuAutobackup = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuTests = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSQLExtractor = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuAutobackup = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuSafeBoard = new System.Windows.Forms.ToolStripMenuItem();
             this.LogoText = new System.Windows.Forms.PictureBox();
             this.LogoSymbol = new System.Windows.Forms.PictureBox();
@@ -460,11 +458,9 @@ namespace HAKROS.Forms
             this.CMNicon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MTitle,
             this.toolStripSeparator1,
-            this.CMenuAppControl,
-            this.toolStripSeparator27,
+            this.CMenuLocalBackup,
             this.CMenuTestManager,
             this.CMenuSqlExtractor,
-            this.CMenuLocalBackup,
             this.CMenuSafeboard,
             this.toolStripSeparator25,
             this.MenuShow,
@@ -472,40 +468,35 @@ namespace HAKROS.Forms
             this.toolStripSeparator2,
             this.CMNiconMenuExit});
             this.CMNicon.Name = "CMNicon";
-            this.CMNicon.Size = new System.Drawing.Size(180, 226);
+            this.CMNicon.Size = new System.Drawing.Size(162, 198);
             // 
             // MTitle
             // 
             this.MTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.MTitle.ForeColor = System.Drawing.Color.Black;
             this.MTitle.Name = "MTitle";
-            this.MTitle.Size = new System.Drawing.Size(179, 22);
+            this.MTitle.Size = new System.Drawing.Size(161, 22);
             this.MTitle.Text = "<title>";
             this.MTitle.Click += new System.EventHandler(this.MTitle_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
-            // CMenuAppControl
+            // CMenuLocalBackup
             // 
-            this.CMenuAppControl.Image = ((System.Drawing.Image)(resources.GetObject("CMenuAppControl.Image")));
-            this.CMenuAppControl.Name = "CMenuAppControl";
-            this.CMenuAppControl.Size = new System.Drawing.Size(179, 22);
-            this.CMenuAppControl.Text = "MPRS App Control..";
-            this.CMenuAppControl.Click += new System.EventHandler(this.CMenuAppControl_Click);
-            // 
-            // toolStripSeparator27
-            // 
-            this.toolStripSeparator27.Name = "toolStripSeparator27";
-            this.toolStripSeparator27.Size = new System.Drawing.Size(176, 6);
+            this.CMenuLocalBackup.Image = ((System.Drawing.Image)(resources.GetObject("CMenuLocalBackup.Image")));
+            this.CMenuLocalBackup.Name = "CMenuLocalBackup";
+            this.CMenuLocalBackup.Size = new System.Drawing.Size(161, 22);
+            this.CMenuLocalBackup.Text = "Local Backup..";
+            this.CMenuLocalBackup.Click += new System.EventHandler(this.CMenuLocalBackup_Click);
             // 
             // CMenuTestManager
             // 
             this.CMenuTestManager.Image = ((System.Drawing.Image)(resources.GetObject("CMenuTestManager.Image")));
             this.CMenuTestManager.Name = "CMenuTestManager";
-            this.CMenuTestManager.Size = new System.Drawing.Size(179, 22);
+            this.CMenuTestManager.Size = new System.Drawing.Size(161, 22);
             this.CMenuTestManager.Text = "Test Manager..";
             this.CMenuTestManager.Click += new System.EventHandler(this.CMenuTestManager_Click);
             // 
@@ -513,35 +504,27 @@ namespace HAKROS.Forms
             // 
             this.CMenuSqlExtractor.Image = ((System.Drawing.Image)(resources.GetObject("CMenuSqlExtractor.Image")));
             this.CMenuSqlExtractor.Name = "CMenuSqlExtractor";
-            this.CMenuSqlExtractor.Size = new System.Drawing.Size(179, 22);
+            this.CMenuSqlExtractor.Size = new System.Drawing.Size(161, 22);
             this.CMenuSqlExtractor.Text = "SQL Extractor..";
             this.CMenuSqlExtractor.Click += new System.EventHandler(this.CMenuSqlExtractor_Click);
-            // 
-            // CMenuLocalBackup
-            // 
-            this.CMenuLocalBackup.Image = ((System.Drawing.Image)(resources.GetObject("CMenuLocalBackup.Image")));
-            this.CMenuLocalBackup.Name = "CMenuLocalBackup";
-            this.CMenuLocalBackup.Size = new System.Drawing.Size(179, 22);
-            this.CMenuLocalBackup.Text = "Local Backup..";
-            this.CMenuLocalBackup.Click += new System.EventHandler(this.CMenuLocalBackup_Click);
             // 
             // CMenuSafeboard
             // 
             this.CMenuSafeboard.Image = ((System.Drawing.Image)(resources.GetObject("CMenuSafeboard.Image")));
             this.CMenuSafeboard.Name = "CMenuSafeboard";
-            this.CMenuSafeboard.Size = new System.Drawing.Size(179, 22);
+            this.CMenuSafeboard.Size = new System.Drawing.Size(161, 22);
             this.CMenuSafeboard.Text = "Safeboard..";
             this.CMenuSafeboard.Click += new System.EventHandler(this.CMenuSafeboard_Click);
             // 
             // toolStripSeparator25
             // 
             this.toolStripSeparator25.Name = "toolStripSeparator25";
-            this.toolStripSeparator25.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator25.Size = new System.Drawing.Size(158, 6);
             // 
             // MenuShow
             // 
             this.MenuShow.Name = "MenuShow";
-            this.MenuShow.Size = new System.Drawing.Size(179, 22);
+            this.MenuShow.Size = new System.Drawing.Size(161, 22);
             this.MenuShow.Text = "Show Window";
             this.MenuShow.Visible = false;
             this.MenuShow.Click += new System.EventHandler(this.MenuShow_Click);
@@ -549,19 +532,19 @@ namespace HAKROS.Forms
             // MenuHide
             // 
             this.MenuHide.Name = "MenuHide";
-            this.MenuHide.Size = new System.Drawing.Size(179, 22);
+            this.MenuHide.Size = new System.Drawing.Size(161, 22);
             this.MenuHide.Text = "Hide Window";
             this.MenuHide.Click += new System.EventHandler(this.MenuHide_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
             // 
             // CMNiconMenuExit
             // 
             this.CMNiconMenuExit.Name = "CMNiconMenuExit";
-            this.CMNiconMenuExit.Size = new System.Drawing.Size(179, 22);
+            this.CMNiconMenuExit.Size = new System.Drawing.Size(161, 22);
             this.CMNiconMenuExit.Text = "Exit application..";
             this.CMNiconMenuExit.Click += new System.EventHandler(this.CMNiconMenuExit_Click);
             // 
@@ -1856,9 +1839,9 @@ namespace HAKROS.Forms
             this.MenuTools,
             this.MenuSystem,
             this.sPECIALTOOLSToolStripMenuItem});
-            this.MainMenu.Location = new System.Drawing.Point(668, 9);
+            this.MainMenu.Location = new System.Drawing.Point(548, 9);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(456, 24);
+            this.MainMenu.Size = new System.Drawing.Size(576, 24);
             this.MainMenu.TabIndex = 100000017;
             // 
             // MenuFile
@@ -1872,6 +1855,8 @@ namespace HAKROS.Forms
             this.Menu1_CheckNetwork,
             this.toolStripSeparator23,
             this.Menu1_AutoscaleMode,
+            this.toolStripSeparator26,
+            this.Menu1_CreateDesktopShortcut,
             this.toolStripSeparator20,
             this.Menu1_ExitApp});
             this.MenuFile.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1972,6 +1957,18 @@ namespace HAKROS.Forms
             this.Menu1_AutoscaleMode_3.Size = new System.Drawing.Size(115, 22);
             this.Menu1_AutoscaleMode_3.Text = "DPI";
             this.Menu1_AutoscaleMode_3.Click += new System.EventHandler(this.Menu1_AutoscaleMode_3_Click);
+            // 
+            // toolStripSeparator26
+            // 
+            this.toolStripSeparator26.Name = "toolStripSeparator26";
+            this.toolStripSeparator26.Size = new System.Drawing.Size(222, 6);
+            // 
+            // Menu1_CreateDesktopShortcut
+            // 
+            this.Menu1_CreateDesktopShortcut.Name = "Menu1_CreateDesktopShortcut";
+            this.Menu1_CreateDesktopShortcut.Size = new System.Drawing.Size(225, 22);
+            this.Menu1_CreateDesktopShortcut.Text = "Create desktop shortcut..";
+            this.Menu1_CreateDesktopShortcut.Click += new System.EventHandler(this.Menu1_CreateDesktopShortcut_Click);
             // 
             // toolStripSeparator20
             // 
@@ -2467,11 +2464,9 @@ namespace HAKROS.Forms
             // sPECIALTOOLSToolStripMenuItem
             // 
             this.sPECIALTOOLSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.appControlToolStripMenuItem,
-            this.toolStripSeparator26,
+            this.MenuAutobackup,
             this.MenuTests,
             this.MenuSQLExtractor,
-            this.MenuAutobackup,
             this.MenuSafeBoard});
             this.sPECIALTOOLSToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sPECIALTOOLSToolStripMenuItem.ForeColor = System.Drawing.Color.White;
@@ -2480,26 +2475,21 @@ namespace HAKROS.Forms
             this.sPECIALTOOLSToolStripMenuItem.Size = new System.Drawing.Size(128, 20);
             this.sPECIALTOOLSToolStripMenuItem.Text = "SPECIAL TOOLS";
             // 
-            // appControlToolStripMenuItem
+            // MenuAutobackup
             // 
-            this.appControlToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("appControlToolStripMenuItem.Image")));
-            this.appControlToolStripMenuItem.Name = "appControlToolStripMenuItem";
-            this.appControlToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.appControlToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.appControlToolStripMenuItem.Text = "MPRS App Control..";
-            this.appControlToolStripMenuItem.Click += new System.EventHandler(this.MenuAppControl_Click);
-            // 
-            // toolStripSeparator26
-            // 
-            this.toolStripSeparator26.Name = "toolStripSeparator26";
-            this.toolStripSeparator26.Size = new System.Drawing.Size(203, 6);
+            this.MenuAutobackup.Image = ((System.Drawing.Image)(resources.GetObject("MenuAutobackup.Image")));
+            this.MenuAutobackup.Name = "MenuAutobackup";
+            this.MenuAutobackup.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.MenuAutobackup.Size = new System.Drawing.Size(179, 22);
+            this.MenuAutobackup.Text = "Local Backup..";
+            this.MenuAutobackup.Click += new System.EventHandler(this.MenuAutobackup_Click);
             // 
             // MenuTests
             // 
             this.MenuTests.Image = ((System.Drawing.Image)(resources.GetObject("MenuTests.Image")));
             this.MenuTests.Name = "MenuTests";
             this.MenuTests.ShortcutKeys = System.Windows.Forms.Keys.F6;
-            this.MenuTests.Size = new System.Drawing.Size(206, 22);
+            this.MenuTests.Size = new System.Drawing.Size(179, 22);
             this.MenuTests.Text = "Test Manager..";
             this.MenuTests.Click += new System.EventHandler(this.MenuTests_Click);
             // 
@@ -2508,25 +2498,16 @@ namespace HAKROS.Forms
             this.MenuSQLExtractor.Image = ((System.Drawing.Image)(resources.GetObject("MenuSQLExtractor.Image")));
             this.MenuSQLExtractor.Name = "MenuSQLExtractor";
             this.MenuSQLExtractor.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.MenuSQLExtractor.Size = new System.Drawing.Size(206, 22);
+            this.MenuSQLExtractor.Size = new System.Drawing.Size(179, 22);
             this.MenuSQLExtractor.Text = "SQL Extractor..";
             this.MenuSQLExtractor.Click += new System.EventHandler(this.MenuSQLExtractor_Click);
-            // 
-            // MenuAutobackup
-            // 
-            this.MenuAutobackup.Image = ((System.Drawing.Image)(resources.GetObject("MenuAutobackup.Image")));
-            this.MenuAutobackup.Name = "MenuAutobackup";
-            this.MenuAutobackup.ShortcutKeys = System.Windows.Forms.Keys.F8;
-            this.MenuAutobackup.Size = new System.Drawing.Size(206, 22);
-            this.MenuAutobackup.Text = "Local Backup..";
-            this.MenuAutobackup.Click += new System.EventHandler(this.MenuAutobackup_Click);
             // 
             // MenuSafeBoard
             // 
             this.MenuSafeBoard.Image = ((System.Drawing.Image)(resources.GetObject("MenuSafeBoard.Image")));
             this.MenuSafeBoard.Name = "MenuSafeBoard";
-            this.MenuSafeBoard.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.MenuSafeBoard.Size = new System.Drawing.Size(206, 22);
+            this.MenuSafeBoard.ShortcutKeys = System.Windows.Forms.Keys.F8;
+            this.MenuSafeBoard.Size = new System.Drawing.Size(179, 22);
             this.MenuSafeBoard.Text = "Safeboard..";
             this.MenuSafeBoard.Click += new System.EventHandler(this.MenuSafeBoard_Click);
             // 
@@ -2842,10 +2823,8 @@ namespace HAKROS.Forms
         private System.Windows.Forms.ToolStripMenuItem CMenuSqlExtractor;
         private System.Windows.Forms.ToolStripMenuItem CMenuLocalBackup;
         private System.Windows.Forms.ToolStripMenuItem MenuSafeBoard;
-        private System.Windows.Forms.ToolStripMenuItem appControlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem CMenuAppControl;
         private System.Windows.Forms.ToolStripMenuItem CMenuSafeboard;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator27;
+        private System.Windows.Forms.ToolStripMenuItem Menu1_CreateDesktopShortcut;
     }
 }
