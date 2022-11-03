@@ -63,12 +63,6 @@ namespace HAKROS.Classes
             return DirCfg + "style.ini";
         }
 
-        static public string FileEULA()
-        {
-            CreateDirs();
-            return DirCfg + "eula.ini";
-        }
-
         static public string FileFolders()
         {
             CreateDirs();
