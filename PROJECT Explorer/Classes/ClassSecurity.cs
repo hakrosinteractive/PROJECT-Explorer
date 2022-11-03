@@ -1,4 +1,4 @@
-﻿using AIRBUS.Forms;
+using AIRBUS.Forms;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -69,25 +69,12 @@ namespace HAKROS.Classes
 
         static public bool CheckEula()
         {
-            string fileEula = ClassGeneral.FileEULA();
-            if(!File.Exists(fileEula))
+            FrmLicense goLicense = new FrmLicense();
+            if (goLicense.ShowDialog() == DialogResult.OK)
             {
-                FrmLicense goLicense = new FrmLicense();
-                if(goLicense.ShowDialog() == DialogResult.OK)
-                {
-                    try
-                    {
-                        StreamWriter wr = new StreamWriter(fileEula, false, Encoding.UTF8);
-                        wr.WriteLine("License accepted at: " + DateTime.Now.ToLongDateString());
-                        wr.Close();
-                    }
-                    catch
-                    {
-                        //Error !!
-                    }
-                }
+                return true;
             }
-            return File.Exists(fileEula);
+            return false;
         }
 
         static public string GetMD5FromFile(string filepath)
