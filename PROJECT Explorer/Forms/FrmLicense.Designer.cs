@@ -1,4 +1,4 @@
-﻿namespace AIRBUS.Forms
+namespace HAKROS.Forms
 {
     partial class FrmLicense
     {
@@ -54,7 +54,7 @@
             this.PanelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTop.Location = new System.Drawing.Point(0, 0);
             this.PanelTop.Name = "PanelTop";
-            this.PanelTop.Size = new System.Drawing.Size(686, 33);
+            this.PanelTop.Size = new System.Drawing.Size(684, 33);
             this.PanelTop.TabIndex = 9;
             // 
             // label9
@@ -75,9 +75,9 @@
             this.panel1.Controls.Add(this.BtnCancel);
             this.panel1.Controls.Add(this.BtnAccept);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 526);
+            this.panel1.Location = new System.Drawing.Point(0, 566);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(686, 45);
+            this.panel1.Size = new System.Drawing.Size(684, 45);
             this.panel1.TabIndex = 11;
             // 
             // License
@@ -112,7 +112,7 @@
             this.BtnAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnAccept.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnAccept.Font = new System.Drawing.Font("Verdana", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAccept.Location = new System.Drawing.Point(562, 7);
+            this.BtnAccept.Location = new System.Drawing.Point(560, 7);
             this.BtnAccept.Name = "BtnAccept";
             this.BtnAccept.Size = new System.Drawing.Size(112, 31);
             this.BtnAccept.TabIndex = 0;
@@ -130,7 +130,7 @@
             this.wb.Name = "wb";
             this.wb.ScriptErrorsSuppressed = true;
             this.wb.ScrollBarsEnabled = false;
-            this.wb.Size = new System.Drawing.Size(686, 328);
+            this.wb.Size = new System.Drawing.Size(684, 368);
             this.wb.TabIndex = 0;
             this.wb.TabStop = false;
             // 
@@ -149,9 +149,9 @@
             this.PanelDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelDetails.Controls.Add(this.pictureBox1);
             this.PanelDetails.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PanelDetails.Location = new System.Drawing.Point(0, 394);
+            this.PanelDetails.Location = new System.Drawing.Point(0, 434);
             this.PanelDetails.Name = "PanelDetails";
-            this.PanelDetails.Size = new System.Drawing.Size(686, 132);
+            this.PanelDetails.Size = new System.Drawing.Size(684, 132);
             this.PanelDetails.TabIndex = 12;
             // 
             // panel2
@@ -159,9 +159,9 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(51)))));
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 361);
+            this.panel2.Location = new System.Drawing.Point(0, 401);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(686, 33);
+            this.panel2.Size = new System.Drawing.Size(684, 33);
             this.panel2.TabIndex = 13;
             // 
             // label1
@@ -179,7 +179,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(686, 571);
+            this.ClientSize = new System.Drawing.Size(684, 611);
             this.Controls.Add(this.wb);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.PanelTop);
@@ -189,9 +189,9 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(702, 610);
+            this.MaximumSize = new System.Drawing.Size(700, 650);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(702, 610);
+            this.MinimumSize = new System.Drawing.Size(700, 650);
             this.Name = "FrmLicense";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "---";
