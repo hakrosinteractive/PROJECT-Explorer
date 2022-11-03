@@ -2648,14 +2648,6 @@ namespace HAKROS.Forms
             }
         }
 
-        private void ShowAPPControl()
-        {
-            if (!ClassGeneral.LoadAppControl())
-            {
-                ClassGeneral.Message("PROJECT App Control not found at default location.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-
         #region BACKUPS
 
         string[] AutoBackupFilters = new string[] { ".cs", ".xaml", ".xaml.cs", ".xml", ".csproj" };
@@ -3325,11 +3317,6 @@ namespace HAKROS.Forms
             }
         }
 
-        private void MenuAppControl_Click(object sender, EventArgs e)
-        {
-            ShowAPPControl();
-        }
-
         private void MenuAutobackup_Click(object sender, EventArgs e)
         {
             ShowBackupWindow();
@@ -3368,6 +3355,17 @@ namespace HAKROS.Forms
                     SetLight();
                 }
                 ClassStyle.RequestUpdateStyle = true;
+            }
+        }
+        private void Menu1_CreateDesktopShortcut_Click(object sender, EventArgs e)
+        {
+            if(ClassGeneral.CreateDesktopShortcut())
+            {
+                ClassGeneral.Message("Shortcut created successfully.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                ClassGeneral.Message("There was an error creating the shortcut.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -3984,11 +3982,6 @@ namespace HAKROS.Forms
             }
         }
 
-        private void CMenuAppControl_Click(object sender, EventArgs e)
-        {
-            ShowAPPControl();
-        }
-
         private void CMenuTestManager_Click(object sender, EventArgs e)
         {
             ShowTests();
@@ -4008,5 +4001,7 @@ namespace HAKROS.Forms
         {
             ShowSafeBoard();
         }
+
+      
     }
 }
