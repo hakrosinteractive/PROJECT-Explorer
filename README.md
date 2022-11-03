@@ -8,9 +8,9 @@ What can be done with the program?
 - Search by name, path and content
 - For content search it is possible:
     
-    o Search full phrases or stand-alone terms
-    o Search all the terms in the same or different files.
-    o Search in the same line for several terms that are not necessarily consecutive
+    >> Search full phrases or stand-alone terms
+    >> Search all the terms in the same or different files.
+    >> Search in the same line for several terms that are not necessarily consecutive
 
 - Search filters by extension and/or keywords
 - Quick filters to automatically filter certain types of files (include/exclude).
@@ -44,7 +44,7 @@ SQL Extractor
 Safeboard
 
 - This module is a password generator based on a project I did a long time ago.
-- In essence, I already had it done and I have incorporated it for you because it is always good to have a password generator at hand… :-p !
+- In essence, I already had it done and I have incorporated it for you because it is always good to have a password generator.
 - Allows you to generate a secure password using a combination keyboard.
 - The order of the combination affects the result generating different passwords.
 - The same combination always generates the same password but the order must be the same.
