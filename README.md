@@ -1,5 +1,5 @@
 
-# PROJECT-Explorer
+# PROJECT Explorer
 Support program to perform searches in projects made with .NET
 
 What can be done with the program?
