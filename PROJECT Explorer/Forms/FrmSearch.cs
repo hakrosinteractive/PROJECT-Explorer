@@ -2682,7 +2682,6 @@ namespace HAKROS.Forms
             catch
             {
               //Error
-
             }
         }
 
@@ -2703,7 +2702,14 @@ namespace HAKROS.Forms
 
         private bool DirectoryExists(string dir)
         {
-            return Directory.Exists(dir) && (dir != "\\");
+            try
+            {
+                return Directory.Exists(dir) && (dir != "\\");
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void BackupFile(string fullpath)
@@ -2765,7 +2771,8 @@ namespace HAKROS.Forms
                 {
                     if (ClassGeneral.BackupTotal > 0)
                     {
-                        LblBackupStatus.Text = "Local backup is enabled [" + ClassGeneral.BackupTotal + "]";
+                        string totalBackup = (ClassGeneral.BackupVisible + "/" + ClassGeneral.BackupTotal).ToString();
+                        LblBackupStatus.Text = "Local backup is enabled [" + totalBackup + "]";
                         LblBackupStatus.LinkColor = IsLight() ? Color.Green : Color.SpringGreen;
                     }
                     else
