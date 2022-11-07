@@ -29,12 +29,25 @@ namespace HAKROS.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PanelTop = new System.Windows.Forms.Panel();
+            this.ListFiles = new System.Windows.Forms.DataGridView();
+            this.clock3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cfolder2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cfilename2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chash2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ctotalbackups = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cdate3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PanelHeaderBackups = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.CbBranches = new System.Windows.Forms.ComboBox();
+            this.PanelHeaderBranches = new System.Windows.Forms.Panel();
+            this.LnkCurrentBranch = new System.Windows.Forms.LinkLabel();
+            this.label4 = new System.Windows.Forms.Label();
             this.ListBackups = new System.Windows.Forms.DataGridView();
             this.cfile1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cfile2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,19 +58,15 @@ namespace HAKROS.Forms
             this.csize2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cstatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanelBottom = new System.Windows.Forms.Panel();
-            this.ListFiles = new System.Windows.Forms.DataGridView();
-            this.clock3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cfolder2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cfilename2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chash2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ctotalbackups = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cdate3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PanelHeaderFiles = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.PanelMain = new System.Windows.Forms.Panel();
+            this.FilterShowAll = new System.Windows.Forms.RadioButton();
             this.BtnDeleteSingle = new System.Windows.Forms.Button();
             this.BtnCompare = new System.Windows.Forms.Button();
+            this.FilterShowNoSingle = new System.Windows.Forms.RadioButton();
             this.ChbStatus = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -66,21 +75,15 @@ namespace HAKROS.Forms
             this.BtnDeleteSelection = new System.Windows.Forms.Button();
             this.BtnRefresh = new System.Windows.Forms.Button();
             this.tcontrol = new System.Windows.Forms.Timer(this.components);
-            this.PanelHeaderBranches = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.CbBranches = new System.Windows.Forms.ComboBox();
-            this.PanelHeaderBackups = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.TRequestUpdateTotal = new System.Windows.Forms.Timer(this.components);
-            this.LnkCurrentBranch = new System.Windows.Forms.LinkLabel();
             this.PanelTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListFiles)).BeginInit();
+            this.PanelHeaderBackups.SuspendLayout();
+            this.PanelHeaderBranches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListBackups)).BeginInit();
             this.PanelBottom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ListFiles)).BeginInit();
             this.PanelHeaderFiles.SuspendLayout();
             this.PanelMain.SuspendLayout();
-            this.PanelHeaderBranches.SuspendLayout();
-            this.PanelHeaderBackups.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelTop
@@ -92,8 +95,173 @@ namespace HAKROS.Forms
             this.PanelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelTop.Location = new System.Drawing.Point(0, 0);
             this.PanelTop.Name = "PanelTop";
-            this.PanelTop.Size = new System.Drawing.Size(1008, 387);
+            this.PanelTop.Size = new System.Drawing.Size(1284, 387);
             this.PanelTop.TabIndex = 3;
+            // 
+            // ListFiles
+            // 
+            this.ListFiles.AllowUserToAddRows = false;
+            this.ListFiles.AllowUserToDeleteRows = false;
+            this.ListFiles.AllowUserToResizeColumns = false;
+            this.ListFiles.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Beige;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.PaleGoldenrod;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.ListFiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.ListFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ListFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clock3,
+            this.cfolder2,
+            this.cfilename2,
+            this.chash2,
+            this.ctotalbackups,
+            this.cdate3});
+            this.ListFiles.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Beige;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.PaleGoldenrod;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ListFiles.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ListFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListFiles.Location = new System.Drawing.Point(0, 91);
+            this.ListFiles.MultiSelect = false;
+            this.ListFiles.Name = "ListFiles";
+            this.ListFiles.ReadOnly = true;
+            this.ListFiles.RowHeadersVisible = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Beige;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.PaleGoldenrod;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.ListFiles.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.ListFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ListFiles.Size = new System.Drawing.Size(1284, 296);
+            this.ListFiles.TabIndex = 15;
+            this.ListFiles.TabStop = false;
+            this.ListFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListFiles_CellClick);
+            this.ListFiles.SelectionChanged += new System.EventHandler(this.ListFiles_SelectionChanged);
+            // 
+            // clock3
+            // 
+            this.clock3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.clock3.HeaderText = "Lock";
+            this.clock3.Name = "clock3";
+            this.clock3.ReadOnly = true;
+            this.clock3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.clock3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.clock3.Width = 41;
+            // 
+            // cfolder2
+            // 
+            this.cfolder2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cfolder2.HeaderText = "Folder";
+            this.cfolder2.Name = "cfolder2";
+            this.cfolder2.ReadOnly = true;
+            // 
+            // cfilename2
+            // 
+            this.cfilename2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.cfilename2.HeaderText = "FileName";
+            this.cfilename2.Name = "cfilename2";
+            this.cfilename2.ReadOnly = true;
+            // 
+            // chash2
+            // 
+            this.chash2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.chash2.HeaderText = "Hash";
+            this.chash2.Name = "chash2";
+            this.chash2.ReadOnly = true;
+            this.chash2.Visible = false;
+            // 
+            // ctotalbackups
+            // 
+            this.ctotalbackups.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ctotalbackups.HeaderText = "Backups";
+            this.ctotalbackups.Name = "ctotalbackups";
+            this.ctotalbackups.ReadOnly = true;
+            this.ctotalbackups.Width = 84;
+            // 
+            // cdate3
+            // 
+            this.cdate3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.cdate3.HeaderText = "Date";
+            this.cdate3.Name = "cdate3";
+            this.cdate3.ReadOnly = true;
+            this.cdate3.Width = 62;
+            // 
+            // PanelHeaderBackups
+            // 
+            this.PanelHeaderBackups.BackColor = System.Drawing.Color.White;
+            this.PanelHeaderBackups.Controls.Add(this.label5);
+            this.PanelHeaderBackups.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelHeaderBackups.Location = new System.Drawing.Point(0, 61);
+            this.PanelHeaderBackups.Name = "PanelHeaderBackups";
+            this.PanelHeaderBackups.Size = new System.Drawing.Size(1284, 30);
+            this.PanelHeaderBackups.TabIndex = 18;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Blue;
+            this.label5.Location = new System.Drawing.Point(6, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(119, 14);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Available backups";
+            // 
+            // CbBranches
+            // 
+            this.CbBranches.BackColor = System.Drawing.Color.White;
+            this.CbBranches.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CbBranches.Dock = System.Windows.Forms.DockStyle.Top;
+            this.CbBranches.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbBranches.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CbBranches.ForeColor = System.Drawing.Color.Black;
+            this.CbBranches.FormattingEnabled = true;
+            this.CbBranches.Location = new System.Drawing.Point(0, 30);
+            this.CbBranches.Name = "CbBranches";
+            this.CbBranches.Size = new System.Drawing.Size(1284, 31);
+            this.CbBranches.TabIndex = 17;
+            this.CbBranches.SelectedIndexChanged += new System.EventHandler(this.CbBranches_SelectedIndexChanged);
+            // 
+            // PanelHeaderBranches
+            // 
+            this.PanelHeaderBranches.BackColor = System.Drawing.Color.White;
+            this.PanelHeaderBranches.Controls.Add(this.LnkCurrentBranch);
+            this.PanelHeaderBranches.Controls.Add(this.label4);
+            this.PanelHeaderBranches.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PanelHeaderBranches.Location = new System.Drawing.Point(0, 0);
+            this.PanelHeaderBranches.Name = "PanelHeaderBranches";
+            this.PanelHeaderBranches.Size = new System.Drawing.Size(1284, 30);
+            this.PanelHeaderBranches.TabIndex = 16;
+            // 
+            // LnkCurrentBranch
+            // 
+            this.LnkCurrentBranch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LnkCurrentBranch.AutoSize = true;
+            this.LnkCurrentBranch.Font = new System.Drawing.Font("Verdana", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LnkCurrentBranch.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.LnkCurrentBranch.LinkColor = System.Drawing.Color.Green;
+            this.LnkCurrentBranch.Location = new System.Drawing.Point(1132, 9);
+            this.LnkCurrentBranch.Name = "LnkCurrentBranch";
+            this.LnkCurrentBranch.Size = new System.Drawing.Size(145, 13);
+            this.LnkCurrentBranch.TabIndex = 0;
+            this.LnkCurrentBranch.TabStop = true;
+            this.LnkCurrentBranch.Text = "Select current branch";
+            this.LnkCurrentBranch.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkCurrentBranch_LinkClicked);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Blue;
+            this.label4.Location = new System.Drawing.Point(6, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 14);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Branches";
             // 
             // ListBackups
             // 
@@ -101,11 +269,11 @@ namespace HAKROS.Forms
             this.ListBackups.AllowUserToDeleteRows = false;
             this.ListBackups.AllowUserToResizeColumns = false;
             this.ListBackups.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            this.ListBackups.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            this.ListBackups.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.ListBackups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListBackups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cfile1,
@@ -122,13 +290,13 @@ namespace HAKROS.Forms
             this.ListBackups.Name = "ListBackups";
             this.ListBackups.ReadOnly = true;
             this.ListBackups.RowHeadersVisible = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
-            this.ListBackups.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            this.ListBackups.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.ListBackups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ListBackups.Size = new System.Drawing.Size(1008, 107);
+            this.ListBackups.Size = new System.Drawing.Size(1284, 207);
             this.ListBackups.TabIndex = 11;
             this.ListBackups.TabStop = false;
             this.ListBackups.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Listbackups_CellDoubleClick);
@@ -197,102 +365,8 @@ namespace HAKROS.Forms
             this.PanelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelBottom.Location = new System.Drawing.Point(0, 387);
             this.PanelBottom.Name = "PanelBottom";
-            this.PanelBottom.Size = new System.Drawing.Size(1008, 137);
+            this.PanelBottom.Size = new System.Drawing.Size(1284, 237);
             this.PanelBottom.TabIndex = 14;
-            // 
-            // ListFiles
-            // 
-            this.ListFiles.AllowUserToAddRows = false;
-            this.ListFiles.AllowUserToDeleteRows = false;
-            this.ListFiles.AllowUserToResizeColumns = false;
-            this.ListFiles.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Beige;
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.PaleGoldenrod;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            this.ListFiles.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.ListFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ListFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clock3,
-            this.cfolder2,
-            this.cfilename2,
-            this.chash2,
-            this.ctotalbackups,
-            this.cdate3});
-            this.ListFiles.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Beige;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.PaleGoldenrod;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ListFiles.DefaultCellStyle = dataGridViewCellStyle7;
-            this.ListFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ListFiles.Location = new System.Drawing.Point(0, 91);
-            this.ListFiles.MultiSelect = false;
-            this.ListFiles.Name = "ListFiles";
-            this.ListFiles.ReadOnly = true;
-            this.ListFiles.RowHeadersVisible = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Beige;
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.PaleGoldenrod;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            this.ListFiles.RowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.ListFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ListFiles.Size = new System.Drawing.Size(1008, 296);
-            this.ListFiles.TabIndex = 15;
-            this.ListFiles.TabStop = false;
-            this.ListFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListFiles_CellClick);
-            this.ListFiles.SelectionChanged += new System.EventHandler(this.ListFiles_SelectionChanged);
-            // 
-            // clock3
-            // 
-            this.clock3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.clock3.HeaderText = "Lock";
-            this.clock3.Name = "clock3";
-            this.clock3.ReadOnly = true;
-            this.clock3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.clock3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.clock3.Width = 41;
-            // 
-            // cfolder2
-            // 
-            this.cfolder2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.cfolder2.HeaderText = "Folder";
-            this.cfolder2.Name = "cfolder2";
-            this.cfolder2.ReadOnly = true;
-            // 
-            // cfilename2
-            // 
-            this.cfilename2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.cfilename2.HeaderText = "FileName";
-            this.cfilename2.Name = "cfilename2";
-            this.cfilename2.ReadOnly = true;
-            // 
-            // chash2
-            // 
-            this.chash2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.chash2.HeaderText = "Hash";
-            this.chash2.Name = "chash2";
-            this.chash2.ReadOnly = true;
-            this.chash2.Visible = false;
-            // 
-            // ctotalbackups
-            // 
-            this.ctotalbackups.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ctotalbackups.HeaderText = "Backups";
-            this.ctotalbackups.Name = "ctotalbackups";
-            this.ctotalbackups.ReadOnly = true;
-            this.ctotalbackups.Width = 84;
-            // 
-            // cdate3
-            // 
-            this.cdate3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.cdate3.HeaderText = "Date";
-            this.cdate3.Name = "cdate3";
-            this.cdate3.ReadOnly = true;
-            this.cdate3.Width = 62;
             // 
             // PanelHeaderFiles
             // 
@@ -301,7 +375,7 @@ namespace HAKROS.Forms
             this.PanelHeaderFiles.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelHeaderFiles.Location = new System.Drawing.Point(0, 0);
             this.PanelHeaderFiles.Name = "PanelHeaderFiles";
-            this.PanelHeaderFiles.Size = new System.Drawing.Size(1008, 30);
+            this.PanelHeaderFiles.Size = new System.Drawing.Size(1284, 30);
             this.PanelHeaderFiles.TabIndex = 14;
             // 
             // label7
@@ -317,9 +391,12 @@ namespace HAKROS.Forms
             // PanelMain
             // 
             this.PanelMain.BackColor = System.Drawing.Color.White;
+            this.PanelMain.Controls.Add(this.FilterShowAll);
             this.PanelMain.Controls.Add(this.BtnDeleteSingle);
             this.PanelMain.Controls.Add(this.BtnCompare);
+            this.PanelMain.Controls.Add(this.FilterShowNoSingle);
             this.PanelMain.Controls.Add(this.ChbStatus);
+            this.PanelMain.Controls.Add(this.label6);
             this.PanelMain.Controls.Add(this.label3);
             this.PanelMain.Controls.Add(this.label2);
             this.PanelMain.Controls.Add(this.label1);
@@ -328,17 +405,32 @@ namespace HAKROS.Forms
             this.PanelMain.Controls.Add(this.BtnDeleteSelection);
             this.PanelMain.Controls.Add(this.BtnRefresh);
             this.PanelMain.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PanelMain.Location = new System.Drawing.Point(0, 524);
+            this.PanelMain.Location = new System.Drawing.Point(0, 624);
             this.PanelMain.Name = "PanelMain";
-            this.PanelMain.Size = new System.Drawing.Size(1008, 37);
+            this.PanelMain.Size = new System.Drawing.Size(1284, 37);
             this.PanelMain.TabIndex = 5;
+            // 
+            // FilterShowAll
+            // 
+            this.FilterShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FilterShowAll.AutoSize = true;
+            this.FilterShowAll.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FilterShowAll.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.FilterShowAll.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.FilterShowAll.Location = new System.Drawing.Point(446, 10);
+            this.FilterShowAll.Name = "FilterShowAll";
+            this.FilterShowAll.Size = new System.Drawing.Size(117, 16);
+            this.FilterShowAll.TabIndex = 12;
+            this.FilterShowAll.Text = "Show all backups";
+            this.FilterShowAll.UseVisualStyleBackColor = true;
+            this.FilterShowAll.Click += new System.EventHandler(this.FilterShowAll_Click);
             // 
             // BtnDeleteSingle
             // 
             this.BtnDeleteSingle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnDeleteSingle.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnDeleteSingle.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnDeleteSingle.Location = new System.Drawing.Point(493, 7);
+            this.BtnDeleteSingle.Location = new System.Drawing.Point(769, 7);
             this.BtnDeleteSingle.Name = "BtnDeleteSingle";
             this.BtnDeleteSingle.Size = new System.Drawing.Size(148, 22);
             this.BtnDeleteSingle.TabIndex = 27;
@@ -352,7 +444,7 @@ namespace HAKROS.Forms
             this.BtnCompare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnCompare.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnCompare.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnCompare.Location = new System.Drawing.Point(776, 7);
+            this.BtnCompare.Location = new System.Drawing.Point(1052, 7);
             this.BtnCompare.Name = "BtnCompare";
             this.BtnCompare.Size = new System.Drawing.Size(136, 22);
             this.BtnCompare.TabIndex = 26;
@@ -360,6 +452,23 @@ namespace HAKROS.Forms
             this.BtnCompare.Text = "Compare selection";
             this.BtnCompare.UseVisualStyleBackColor = true;
             this.BtnCompare.Click += new System.EventHandler(this.BtnCompare_Click);
+            // 
+            // FilterShowNoSingle
+            // 
+            this.FilterShowNoSingle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FilterShowNoSingle.AutoSize = true;
+            this.FilterShowNoSingle.Checked = true;
+            this.FilterShowNoSingle.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FilterShowNoSingle.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.FilterShowNoSingle.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.FilterShowNoSingle.Location = new System.Drawing.Point(283, 10);
+            this.FilterShowNoSingle.Name = "FilterShowNoSingle";
+            this.FilterShowNoSingle.Size = new System.Drawing.Size(157, 16);
+            this.FilterShowNoSingle.TabIndex = 11;
+            this.FilterShowNoSingle.TabStop = true;
+            this.FilterShowNoSingle.Text = "Not show single backups";
+            this.FilterShowNoSingle.UseVisualStyleBackColor = true;
+            this.FilterShowNoSingle.Click += new System.EventHandler(this.FilterShowNoSingle_Click);
             // 
             // ChbStatus
             // 
@@ -376,11 +485,21 @@ namespace HAKROS.Forms
             this.ChbStatus.CheckedChanged += new System.EventHandler(this.ChbStatus_CheckedChanged);
             this.ChbStatus.Click += new System.EventHandler(this.ChbStatus_Click);
             // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(567, 11);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(12, 14);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "|";
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(479, 11);
+            this.label3.Location = new System.Drawing.Point(755, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(12, 14);
             this.label3.TabIndex = 24;
@@ -390,7 +509,7 @@ namespace HAKROS.Forms
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(643, 11);
+            this.label2.Location = new System.Drawing.Point(919, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(12, 14);
             this.label2.TabIndex = 24;
@@ -400,7 +519,7 @@ namespace HAKROS.Forms
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(762, 11);
+            this.label1.Location = new System.Drawing.Point(1038, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(12, 14);
             this.label1.TabIndex = 24;
@@ -410,7 +529,7 @@ namespace HAKROS.Forms
             // 
             this.separator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.separator.AutoSize = true;
-            this.separator.Location = new System.Drawing.Point(914, 11);
+            this.separator.Location = new System.Drawing.Point(1190, 11);
             this.separator.Name = "separator";
             this.separator.Size = new System.Drawing.Size(12, 14);
             this.separator.TabIndex = 24;
@@ -421,7 +540,7 @@ namespace HAKROS.Forms
             this.BtnDeleteAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnDeleteAll.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnDeleteAll.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnDeleteAll.Location = new System.Drawing.Point(306, 7);
+            this.BtnDeleteAll.Location = new System.Drawing.Point(582, 7);
             this.BtnDeleteAll.Name = "BtnDeleteAll";
             this.BtnDeleteAll.Size = new System.Drawing.Size(171, 22);
             this.BtnDeleteAll.TabIndex = 23;
@@ -435,7 +554,7 @@ namespace HAKROS.Forms
             this.BtnDeleteSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnDeleteSelection.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnDeleteSelection.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnDeleteSelection.Location = new System.Drawing.Point(657, 7);
+            this.BtnDeleteSelection.Location = new System.Drawing.Point(933, 7);
             this.BtnDeleteSelection.Name = "BtnDeleteSelection";
             this.BtnDeleteSelection.Size = new System.Drawing.Size(103, 22);
             this.BtnDeleteSelection.TabIndex = 0;
@@ -449,7 +568,7 @@ namespace HAKROS.Forms
             this.BtnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BtnRefresh.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnRefresh.Location = new System.Drawing.Point(928, 7);
+            this.BtnRefresh.Location = new System.Drawing.Point(1204, 7);
             this.BtnRefresh.Name = "BtnRefresh";
             this.BtnRefresh.Size = new System.Drawing.Size(73, 22);
             this.BtnRefresh.TabIndex = 21;
@@ -462,90 +581,19 @@ namespace HAKROS.Forms
             // 
             this.tcontrol.Tick += new System.EventHandler(this.tcontrol_Tick);
             // 
-            // PanelHeaderBranches
-            // 
-            this.PanelHeaderBranches.BackColor = System.Drawing.Color.White;
-            this.PanelHeaderBranches.Controls.Add(this.LnkCurrentBranch);
-            this.PanelHeaderBranches.Controls.Add(this.label4);
-            this.PanelHeaderBranches.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PanelHeaderBranches.Location = new System.Drawing.Point(0, 0);
-            this.PanelHeaderBranches.Name = "PanelHeaderBranches";
-            this.PanelHeaderBranches.Size = new System.Drawing.Size(1008, 30);
-            this.PanelHeaderBranches.TabIndex = 16;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(6, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 14);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Branches";
-            // 
-            // CbBranches
-            // 
-            this.CbBranches.BackColor = System.Drawing.Color.White;
-            this.CbBranches.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.CbBranches.Dock = System.Windows.Forms.DockStyle.Top;
-            this.CbBranches.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbBranches.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CbBranches.ForeColor = System.Drawing.Color.Black;
-            this.CbBranches.FormattingEnabled = true;
-            this.CbBranches.Location = new System.Drawing.Point(0, 30);
-            this.CbBranches.Name = "CbBranches";
-            this.CbBranches.Size = new System.Drawing.Size(1008, 31);
-            this.CbBranches.TabIndex = 17;
-            this.CbBranches.SelectedIndexChanged += new System.EventHandler(this.CbBranches_SelectedIndexChanged);
-            // 
-            // PanelHeaderBackups
-            // 
-            this.PanelHeaderBackups.BackColor = System.Drawing.Color.White;
-            this.PanelHeaderBackups.Controls.Add(this.label5);
-            this.PanelHeaderBackups.Dock = System.Windows.Forms.DockStyle.Top;
-            this.PanelHeaderBackups.Location = new System.Drawing.Point(0, 61);
-            this.PanelHeaderBackups.Name = "PanelHeaderBackups";
-            this.PanelHeaderBackups.Size = new System.Drawing.Size(1008, 30);
-            this.PanelHeaderBackups.TabIndex = 18;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(6, 8);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(119, 14);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Available backups";
-            // 
             // TRequestUpdateTotal
             // 
             this.TRequestUpdateTotal.Tick += new System.EventHandler(this.TRequestUpdateTotal_Tick);
             // 
-            // LnkCurrentBranch
-            // 
-            this.LnkCurrentBranch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LnkCurrentBranch.AutoSize = true;
-            this.LnkCurrentBranch.Font = new System.Drawing.Font("Verdana", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LnkCurrentBranch.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.LnkCurrentBranch.LinkColor = System.Drawing.Color.Green;
-            this.LnkCurrentBranch.Location = new System.Drawing.Point(856, 9);
-            this.LnkCurrentBranch.Name = "LnkCurrentBranch";
-            this.LnkCurrentBranch.Size = new System.Drawing.Size(145, 13);
-            this.LnkCurrentBranch.TabIndex = 0;
-            this.LnkCurrentBranch.TabStop = true;
-            this.LnkCurrentBranch.Text = "Select current branch";
-            this.LnkCurrentBranch.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkCurrentBranch_LinkClicked);
-            // 
             // FrmBackups
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.ClientSize = new System.Drawing.Size(1284, 661);
             this.Controls.Add(this.PanelBottom);
             this.Controls.Add(this.PanelTop);
             this.Controls.Add(this.PanelMain);
             this.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinimumSize = new System.Drawing.Size(1024, 600);
+            this.MinimumSize = new System.Drawing.Size(1300, 700);
             this.Name = "FrmBackups";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "--";
@@ -554,17 +602,17 @@ namespace HAKROS.Forms
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmBackups_FormClosing);
             this.Load += new System.EventHandler(this.FrmBackups_Load);
             this.PanelTop.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ListFiles)).EndInit();
+            this.PanelHeaderBackups.ResumeLayout(false);
+            this.PanelHeaderBackups.PerformLayout();
+            this.PanelHeaderBranches.ResumeLayout(false);
+            this.PanelHeaderBranches.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListBackups)).EndInit();
             this.PanelBottom.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ListFiles)).EndInit();
             this.PanelHeaderFiles.ResumeLayout(false);
             this.PanelHeaderFiles.PerformLayout();
             this.PanelMain.ResumeLayout(false);
             this.PanelMain.PerformLayout();
-            this.PanelHeaderBranches.ResumeLayout(false);
-            this.PanelHeaderBranches.PerformLayout();
-            this.PanelHeaderBackups.ResumeLayout(false);
-            this.PanelHeaderBackups.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -609,5 +657,8 @@ namespace HAKROS.Forms
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer TRequestUpdateTotal;
         private System.Windows.Forms.LinkLabel LnkCurrentBranch;
+        private System.Windows.Forms.RadioButton FilterShowAll;
+        private System.Windows.Forms.RadioButton FilterShowNoSingle;
+        private System.Windows.Forms.Label label6;
     }
 }
