@@ -23,6 +23,8 @@ namespace HAKROS.Forms
 
         DateTime LastRequest = DateTime.Now;
 
+        private int TotalFiles = 0;
+
         public FrmBackups()
         {
             InitializeComponent();
@@ -202,6 +204,9 @@ namespace HAKROS.Forms
             try
             {
 
+                Enabled = false;
+                ListFiles.SuspendLayout();
+
                 var auxhash = "";
 
                 if(keepSelection)
@@ -211,6 +216,8 @@ namespace HAKROS.Forms
 
                 ClearTableFiles();
                 ClearTableBackups();
+
+                TotalFiles = 0;
 
                 string branchDir = GetSelectedBranchDir();
 
@@ -291,6 +298,8 @@ namespace HAKROS.Forms
                                             ListFiles.Rows.Add(status, folderpath, filename, filehash, totalBackups, filedate);
                                         }
 
+                                        TotalFiles += 1;
+
                                     }
 
                                 }
@@ -330,10 +339,13 @@ namespace HAKROS.Forms
                 }
 
             }
-            catch(Exception ex)
+            catch
             {
                 //Error !!
             }
+
+            Enabled = true;
+            ListFiles.ResumeLayout();
 
         }
 
@@ -505,6 +517,8 @@ namespace HAKROS.Forms
                 if (File.Exists(originalfilepath))
                 {
 
+                    ListBackups.SuspendLayout();
+
                     var rootlower = ClassGeneral.RootFolder.ToLowerInvariant();
 
                     var di = new DirectoryInfo(dir);
@@ -543,6 +557,8 @@ namespace HAKROS.Forms
                         ListBackups.Rows[ListBackups.RowCount - 1].DefaultCellStyle.ForeColor = fgColor;
 
                     }
+
+                    ListBackups.ResumeLayout();
 
                 }
 
@@ -1269,7 +1285,7 @@ namespace HAKROS.Forms
             try
             {
                 LoadBackups(false);
-                ClassGeneral.BackupTotal = ListFiles.RowCount;
+                ClassGeneral.BackupTotal = TotalFiles;
             }
             catch (Exception)
             {
