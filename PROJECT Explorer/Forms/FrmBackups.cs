@@ -283,7 +283,13 @@ namespace HAKROS.Forms
 
                                         var totalBackups = GetTotalBackups(dirhash);
 
-                                        ListFiles.Rows.Add(status, folderpath, filename, filehash, totalBackups, filedate);
+                                        var condition1 = FilterShowNoSingle.Checked && totalBackups > 1;
+                                        var condition2 = FilterShowAll.Checked;
+
+                                        if (condition1 || condition2)
+                                        {
+                                            ListFiles.Rows.Add(status, folderpath, filename, filehash, totalBackups, filedate);
+                                        }
 
                                     }
 
@@ -904,6 +910,7 @@ namespace HAKROS.Forms
             var selectedIndex = ListFilesSelectedIndex();
             BtnDeleteSelection.Enabled = (selectedIndex != -1);
             BtnCompare.Enabled = (selectedIndex != -1);
+            BtnDeleteSingle.Enabled = FilterShowAll.Checked;
         }
         private void ChbStatus_CheckedChanged(object sender, EventArgs e)
         {
@@ -1022,18 +1029,12 @@ namespace HAKROS.Forms
         {
             try
             {
-
                 string branchDir = GetCurrentBranchDir();
-
                 Directory.CreateDirectory(branchDir);
-
                 if (File.Exists(currentfile))
                 {
-
                     var originalCaseFile = currentfile;
-
                     currentfile = currentfile.ToLowerInvariant();
-
                     if(!currentfile.Contains("\\bin\\") && !currentfile.Contains("\\obj\\"))
                     {
                         var currenthash = ClassSecurity.GetHashNameForString(currentfile);
@@ -1058,16 +1059,19 @@ namespace HAKROS.Forms
                             wr.WriteLine(originalCaseFile);
                             wr.WriteLine(currenthash);
                             wr.Close();
+                            Application.DoEvents();
                         }
 
                         var di = new DirectoryInfo(dir);
                         var fs = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
                         var orderedFiles = fs.OrderBy(f => f.LastWriteTime).ToList();
+                        Application.DoEvents();
                         if (orderedFiles.Count > 0)
                         {
                             var lastbackup = orderedFiles[orderedFiles.Count - 1].FullName;
                             var hash1 = ClassSecurity.GetMD5FromFile(lastbackup);
                             var hash2 = ClassSecurity.GetMD5FromFile(currentfile);
+                            Application.DoEvents();
                             if (hash1 != hash2)
                             {
                                 if (File.Exists(backupfile))
@@ -1076,6 +1080,7 @@ namespace HAKROS.Forms
                                     fi.Attributes = FileAttributes.Normal;
                                 }
                                 File.Copy(currentfile, backupfile, true);
+                                Application.DoEvents();
                                 if (Visible)
                                 {
                                     RefreshList(true);
@@ -1087,6 +1092,7 @@ namespace HAKROS.Forms
                         else
                         {
                             File.Copy(currentfile, backupfile, true);
+                            Application.DoEvents();
                             if (Visible)
                             {
                                 RefreshList(true);
@@ -1102,6 +1108,7 @@ namespace HAKROS.Forms
             {
                 //Error !
             }
+            Application.DoEvents();
         }
         
         private void LoadSelection(int rowindex)
@@ -1284,6 +1291,18 @@ namespace HAKROS.Forms
         {
             LoadBranches(false);
             LoadBackups(false);
+        }
+
+        private void FilterShowNoSingle_Click(object sender, EventArgs e)
+        {
+            LoadBackups(false, false);
+            EvalButtons();
+        }
+
+        private void FilterShowAll_Click(object sender, EventArgs e)
+        {
+            LoadBackups(false, false);
+            EvalButtons();
         }
     }
 }
