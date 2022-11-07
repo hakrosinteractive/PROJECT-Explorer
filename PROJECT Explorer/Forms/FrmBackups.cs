@@ -17,8 +17,6 @@ namespace HAKROS.Forms
         const string TagLocked = "LOCKED";
         const string TagUnlocked = "";
 
-        public string RootFolder = "";
-
         private bool LoadingBranches = false;
 
         DateTime LastRequest = DateTime.Now;
@@ -28,8 +26,14 @@ namespace HAKROS.Forms
         public FrmBackups()
         {
             InitializeComponent();
+        }
+
+        public void InitWindow()
+        {
             LoadAutoBackupCfg();
             DeleteEmptyFolders();
+            LoadBranches(false);
+            CbBranches.Text = GetCurrentBranchDir();
             LoadBackups(false);
             UpdateBackupTotal();
         }
@@ -39,8 +43,7 @@ namespace HAKROS.Forms
             Text = ClassGeneral.GetWindowTitle("Local Backup");
             Icon = ClassGeneral.GetIcon();
             SetWindowSize();
-            LoadBranches(false);
-            LoadBackups(false);
+            //InitWindow();
             tcontrol.Enabled = true;
         }
 
@@ -104,9 +107,9 @@ namespace HAKROS.Forms
 
         private string GetCurrentBranch()
         {
-            if (Directory.Exists(RootFolder))
+            if (Directory.Exists(ClassGeneral.RootFolder))
             {
-                string gitHeaderFile = RootFolder + ".git\\HEAD";
+                string gitHeaderFile = ClassGeneral.RootFolder + ".git\\HEAD";
                 if(File.Exists(gitHeaderFile))
                 {
                     try
@@ -337,6 +340,8 @@ namespace HAKROS.Forms
                 {
                     SelectRowByHash(auxhash);
                 }
+
+                ClassGeneral.BackupTotal = TotalFiles;
 
             }
             catch
