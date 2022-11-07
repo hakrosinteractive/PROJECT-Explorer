@@ -342,6 +342,7 @@ namespace HAKROS.Forms
                 }
 
                 ClassGeneral.BackupTotal = TotalFiles;
+                ClassGeneral.BackupVisible = ListFiles.RowCount;
 
             }
             catch
@@ -927,11 +928,10 @@ namespace HAKROS.Forms
         private void EvalButtons()
         {
             BtnDeleteAll.Enabled = (ListFiles.RowCount > 0);
-            BtnDeleteSingle.Enabled = (ListFiles.RowCount > 0);
+            BtnDeleteSingle.Enabled = (ListFiles.RowCount > 0 && FilterShowAll.Checked);
             var selectedIndex = ListFilesSelectedIndex();
             BtnDeleteSelection.Enabled = (selectedIndex != -1);
             BtnCompare.Enabled = (selectedIndex != -1);
-            BtnDeleteSingle.Enabled = FilterShowAll.Checked;
         }
         private void ChbStatus_CheckedChanged(object sender, EventArgs e)
         {
@@ -1291,10 +1291,12 @@ namespace HAKROS.Forms
             {
                 LoadBackups(false);
                 ClassGeneral.BackupTotal = TotalFiles;
+                ClassGeneral.BackupVisible = ListFiles.RowCount;
             }
             catch (Exception)
             {
                 ClassGeneral.BackupTotal = 0;
+                ClassGeneral.BackupVisible = 0;
             }
         }
 
