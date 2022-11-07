@@ -1839,9 +1839,9 @@ namespace HAKROS.Forms
             this.MenuTools,
             this.MenuSystem,
             this.sPECIALTOOLSToolStripMenuItem});
-            this.MainMenu.Location = new System.Drawing.Point(548, 9);
+            this.MainMenu.Location = new System.Drawing.Point(668, 9);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(576, 24);
+            this.MainMenu.Size = new System.Drawing.Size(456, 24);
             this.MainMenu.TabIndex = 100000017;
             // 
             // MenuFile
