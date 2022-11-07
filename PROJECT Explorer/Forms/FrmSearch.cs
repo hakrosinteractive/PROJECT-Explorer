@@ -116,6 +116,7 @@ namespace HAKROS.Forms
         private string GetRootFolder()
         {
             ClassGeneral.RootFolder = ListFolders.Text;
+            goFrmBackups.InitWindow();
             return ListFolders.Text;
         }
 
@@ -2623,7 +2624,6 @@ namespace HAKROS.Forms
             if (IsFolderDefined())
             {
                 ClassGeneral.IsBusy = true;
-                goFrmBackups.RootFolder = ListFolders.Text;
                 goFrmBackups.ShowDialog();
                 ClassGeneral.IsBusy = false;
             }
