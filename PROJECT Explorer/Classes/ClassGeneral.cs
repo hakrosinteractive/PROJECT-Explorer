@@ -29,6 +29,7 @@ namespace HAKROS.Classes
         static public bool ClipboardStatus = false;
 
         static public int BackupTotal = 0;
+        static public int BackupVisible = 0;
 
         static public AutoScaleMode AutoScaleMode = AutoScaleMode.None;
 
