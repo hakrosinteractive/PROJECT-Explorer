@@ -116,7 +116,6 @@ namespace HAKROS.Forms
         private string GetRootFolder()
         {
             ClassGeneral.RootFolder = ListFolders.Text;
-            goFrmBackups.InitWindow();
             return ListFolders.Text;
         }
 
@@ -193,6 +192,8 @@ namespace HAKROS.Forms
 
             Nicon.Text = Text;
             Nicon.Visible = true;
+
+            goFrmBackups.InitWindow();
 
             IsInit = true;
                        
@@ -520,7 +521,7 @@ namespace HAKROS.Forms
         private bool IsFolderDefined()
         {
             var root = GetRootFolder().ToLowerInvariant();
-            return Directory.Exists(root);
+            return DirectoryExists(root);
         }
 
         private void SearchNow(bool force = false)
@@ -580,7 +581,7 @@ namespace HAKROS.Forms
                             Application.DoEvents();
                         }
 
-                        if (Directory.Exists(pth))
+                        if (DirectoryExists(pth))
                         {
 
                             var results = new List<string>();
@@ -1383,6 +1384,7 @@ namespace HAKROS.Forms
             ClassStyle.ApplyStyleForSeparator(sep8);
             ClassStyle.ApplyStyleForSeparator(sep9);
             ClassStyle.ApplyStyleForSeparator(sep10);
+            ClassStyle.ApplyStyleForSeparator(sep11);
 
             ClassStyle.ApplyStyleForCheckbox(OpcWholeWord);
             ClassStyle.ApplyStyleForCheckbox(OpcIndividualTerms);
@@ -1407,6 +1409,7 @@ namespace HAKROS.Forms
 
             var dgvVisible = (dgv != null) ? dgv.RowCount > 0 : false;
 
+            LnkAnalyzeRows.Visible = dgvVisible;
             LnkRestoreColors.Visible = dgvVisible;
             LnkColorizeRows.Visible = dgvVisible;
             LnkExportToText.Visible = dgvVisible;
@@ -1422,6 +1425,7 @@ namespace HAKROS.Forms
             LnkNextQuery.Visible = ListQueries.Items.Count > 0;
             sep9.Visible = ListQueries.Items.Count > 0;
             sep10.Visible = ListQueries.Items.Count > 0;
+            sep11.Visible = ListQueries.Items.Count > 0;
 
             LnkPrevQuery.Enabled = ListQueries.SelectedIndex > 0;
             LnkNextQuery.Enabled = ListQueries.SelectedIndex < ListQueries.Items.Count - 1;
@@ -1872,7 +1876,7 @@ namespace HAKROS.Forms
         private void BtnLoadRoot_Click(object sender, EventArgs e)
         {
             var root = GetRootFolder();
-            if(Directory.Exists(root))
+            if(DirectoryExists(root))
             {
                 ClassExecute.LoadPath(root);
             }
@@ -2608,7 +2612,7 @@ namespace HAKROS.Forms
         private void ShowSqlExtractor()
         {
             var root = GetRootFolder();
-            if (Directory.Exists(root))
+            if (DirectoryExists(root))
             {
                 var go = new FrmSqlExtractor(root);
                 go.ShowDialog();
@@ -2624,6 +2628,7 @@ namespace HAKROS.Forms
             if (IsFolderDefined())
             {
                 ClassGeneral.IsBusy = true;
+                goFrmBackups.InitWindow();
                 goFrmBackups.ShowDialog();
                 ClassGeneral.IsBusy = false;
             }
@@ -2704,7 +2709,7 @@ namespace HAKROS.Forms
         {
             try
             {
-                return Directory.Exists(dir) && (dir != "\\");
+                return !string.IsNullOrEmpty(dir) && !File.Exists(dir) && Directory.Exists(dir) && (dir != "\\");
             }
             catch
             {
@@ -2723,21 +2728,36 @@ namespace HAKROS.Forms
 
                 if (DirectoryExists(path))
                 {
-                    var di = new DirectoryInfo(path);
-                    var fs = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
-                    foreach (var f in fs)
+                    try
                     {
-                        var extension = Path.GetExtension(f.FullName);
-                        if (AutoBackupFilters.Contains(extension))
+                        var di = new DirectoryInfo(path);
+                        var fs = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+                        foreach (var f in fs)
                         {
-                            var lastChange = f.LastWriteTime;
-                            var diffInSeconds = (now - lastChange).TotalSeconds;
-                            if (diffInSeconds <= 5)
+                            try
                             {
-                                InternalBackupFile(f.FullName);
+                                var extension = Path.GetExtension(f.FullName);
+                                if (AutoBackupFilters.Contains(extension))
+                                {
+                                    var lastChange = f.LastWriteTime;
+                                    var diffInSeconds = (now - lastChange).TotalSeconds;
+                                    if (diffInSeconds <= 5)
+                                    {
+                                        InternalBackupFile(f.FullName);
+                                    }
+                                }
+                            }
+                            catch
+                            {
+                                //Error !!
                             }
                         }
                     }
+                    catch
+                    {
+                        //Error !!
+                    }
+                    
                 }
                 else if (File.Exists(path))
                 {
@@ -2765,14 +2785,13 @@ namespace HAKROS.Forms
             
             PanelBottom.BackColor = IsLight() ? Color.White : ColorTranslator.FromHtml("#333333");
 
-            if(Directory.Exists(ListFolders.Text))
+            if(DirectoryExists(ListFolders.Text))
             {
                 if (ClassGeneral.BackupStatus)
                 {
                     if (ClassGeneral.BackupTotal > 0)
                     {
-                        string totalBackup = (ClassGeneral.BackupVisible + "/" + ClassGeneral.BackupTotal).ToString();
-                        LblBackupStatus.Text = "Local backup is enabled [" + totalBackup + "]";
+                        LblBackupStatus.Text = "Local backup is enabled [" + ClassGeneral.BackupTotal + "]";
                         LblBackupStatus.LinkColor = IsLight() ? Color.Green : Color.SpringGreen;
                     }
                     else
@@ -2962,6 +2981,186 @@ namespace HAKROS.Forms
                 k += 1;
             }
             Enabled = true;
+        }
+
+        private void LnkAnalyzeRows_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var dgv = CurrentDGV();
+            dgv.SuspendLayout();
+            if (dgv != null)
+            {
+                ClassGeneral.IsBusy = true;
+                var fs = new List<string>();
+                var kr = 0;
+                while (kr < dgv.RowCount)
+                {
+                    if (dgv.Rows[kr].Selected)
+                    {
+                        fs.Add(dgv.Rows[kr].Cells[0].Value.ToString());
+                    }
+                    kr += 1;
+                }
+                AnalyzeFiles(fs);
+                ClassGeneral.IsBusy = false;
+            }
+            dgv.ResumeLayout();
+        }
+
+        private void AnalyzeFiles(List<string> fs)
+        {
+            if(fs.Count > 0)
+            {
+
+                var datestamp = ClassBackup.GetDateStamp(DateTime.Now);
+                var timestamp = ClassBackup.GetTimeStamp(DateTime.Now);
+
+                var dir = ClassGeneral.DirAnalysis + datestamp + "\\";
+                var foutput = dir + timestamp + ".txt";
+
+                var kerror = 0;
+
+                Directory.CreateDirectory(dir);
+
+                Enabled = false;
+
+                DateTime startDate = DateTime.Now;
+
+                var errors = new List<string>();
+
+                int kf = 1;
+
+                int startpos = errors.Count;
+
+                bool errorsInFile = false;
+
+                foreach (var finput in fs)
+                {
+                    try
+                    {
+
+                        var fname = Path.GetFileName(finput);
+                        
+                        var lines = new List<string>();
+
+                        using (var sr = new StreamReader(finput, Encoding.UTF8, true))
+                        {
+                            while(!sr.EndOfStream)
+                            {
+                                var line = sr.ReadLine().Trim();
+                                if(line.Length > 1 && !line.StartsWith("//"))
+                                {
+                                    lines.Add(line);
+                                }
+                            }
+                        }
+
+                        if(lines.Count > 0)
+                        {
+                            var mefCreationPolicyIndex = GetMEFCreationPolicyIndex(lines);
+                            if(mefCreationPolicyIndex != -1)
+                            {
+                                string policy = lines[mefCreationPolicyIndex];
+
+                                bool isService = fname.ToLowerInvariant().Contains("service.cs");
+                                bool isViewModel = fname.ToLowerInvariant().Contains("viewmodel.cs");
+                                bool isView = fname.ToLowerInvariant().Contains("view.cs");
+                                bool isRepository = fname.ToLowerInvariant().Contains("repository.cs");
+
+                                if (isService && policy.Contains("CreationPolicy.NonShared"))
+                                {
+                                    errors.Add("ERROR FOUND: CreationPolicy.NonShared");
+                                    errorsInFile = true;
+                                }
+                                else if ((isViewModel || isView || isRepository) && policy.Contains("CreationPolicy.Shared"))
+                                {
+                                    errors.Add("ERROR FOUND: CreationPolicy.Shared");
+                                    errorsInFile = true;
+                                }
+
+                            }
+                        }
+
+                        if(errorsInFile)
+                        {
+                            errors.Insert(startpos, "--------------------------------------------------------------------");
+                            errors.Insert(startpos + 1, "FILENAME: " + fname);
+                            errors.Insert(startpos + 2, "FILEPATH: " + finput);
+                            errors.Insert(startpos + 3, "--------------------------------------------------------------------");
+                            using (var wr = new StreamWriter(foutput, false, Encoding.UTF8))
+                            {
+                                foreach (var error in errors)
+                                {
+                                    wr.WriteLine(error);
+                                }
+                                kerror += 1;
+                            }
+                            errorsInFile = false;
+                        }
+
+                        if ((DateTime.Now - startDate).TotalMilliseconds > 100)
+                        {
+                            startDate = DateTime.Now;
+                            Text = "Analyzing files [" + kf + "/" + fs.Count + "]";
+                            Application.DoEvents();
+                        }
+
+                        startpos = errors.Count;
+                        kf += 1;
+
+                    }
+                    catch
+                    {
+                        ShowErrorExportResults();
+                    }
+                }
+
+                Text = "Analyzing files [" + fs.Count + "/" + fs.Count + "]";
+                Application.DoEvents();
+
+                if (kerror > 0)
+                {
+                    ClassGeneral.Message("Files with errors: " + kerror, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ClassExecute.LoadPath(dir);
+                }
+                else
+                {
+                    ClassGeneral.Message("No errors found on selected files", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                Text = ClassGeneral.GetWindowTitle();
+                Enabled = true;
+
+            }
+        }
+
+        private void HighlightErrorRow(string f)
+        {
+            var dgv = CurrentDGV();
+            var kr = 0;
+            while (kr < dgv.RowCount)
+            {
+                if (dgv.Rows[kr].Selected && f == dgv.Rows[kr].Cells[0].Value.ToString())
+                {
+                    ColorizeRow(dgv, kr, Color.Firebrick);
+                    return;
+                }
+                kr += 1;
+            }
+        }
+
+        private int GetMEFCreationPolicyIndex(List<string> lines)
+        {
+            int kr = 0;
+            while(kr < lines.Count)
+            {
+                var line = lines[kr].ToLowerInvariant();
+                if(line.Contains("partcreationpolicy"))
+                {
+                    return kr;
+                }
+                kr += 1;
+            }
+            return -1;
         }
 
         private void DGVGridStyle(DataGridView dgv)
@@ -3264,6 +3463,11 @@ namespace HAKROS.Forms
         }
         
         private void ListQueries_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadQuery();
+        }
+
+        private void LoadQuery()
         {
             var i = ListQueries.SelectedIndex;
             tbc.SelectedIndex = i;
@@ -4008,7 +4212,6 @@ namespace HAKROS.Forms
         {
             ShowSafeBoard();
         }
-
-      
+         
     }
 }
