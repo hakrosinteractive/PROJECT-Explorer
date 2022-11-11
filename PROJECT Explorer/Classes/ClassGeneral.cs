@@ -20,6 +20,7 @@ namespace HAKROS.Classes
         static readonly public string DirCfg = DirApp + @"\data\cfg\";
         static readonly public string DirClipboard = DirApp + @"data\clipboard\";
         static readonly public string DirLocalBackup = DirApp + @"data\autobackup\";
+        static readonly public string DirAnalysis = DirApp + @"data\analysis\";
 
         static public string RootFolder = "";
 
@@ -50,6 +51,7 @@ namespace HAKROS.Classes
             Directory.CreateDirectory(DirCfg);
             Directory.CreateDirectory(DirClipboard);
             Directory.CreateDirectory(DirLocalBackup);
+            Directory.CreateDirectory(DirAnalysis);
         }
 
         static public string FileCfg()
