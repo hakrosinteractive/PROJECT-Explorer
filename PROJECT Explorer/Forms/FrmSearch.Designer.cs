@@ -139,12 +139,14 @@ namespace HAKROS.Forms
             this.PanelTBC = new System.Windows.Forms.Panel();
             this.tbc = new HAKROS.Classes.Controls.TabControlWithoutHeader();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.LnkAnalyzeRows = new System.Windows.Forms.LinkLabel();
             this.tResults = new System.Windows.Forms.Label();
             this.LnkExportToText = new System.Windows.Forms.LinkLabel();
             this.sep8 = new System.Windows.Forms.Label();
             this.sep7 = new System.Windows.Forms.Label();
             this.LnkRestoreColors = new System.Windows.Forms.LinkLabel();
             this.LnkExportToExcel = new System.Windows.Forms.LinkLabel();
+            this.sep11 = new System.Windows.Forms.Label();
             this.sep6 = new System.Windows.Forms.Label();
             this.LnkColorizeRows = new System.Windows.Forms.LinkLabel();
             this.ListQueries = new HAKROS.Classes.Controls.FlatComboBox();
@@ -1429,12 +1431,14 @@ namespace HAKROS.Forms
             // 
             // panel8
             // 
+            this.panel8.Controls.Add(this.LnkAnalyzeRows);
             this.panel8.Controls.Add(this.tResults);
             this.panel8.Controls.Add(this.LnkExportToText);
             this.panel8.Controls.Add(this.sep8);
             this.panel8.Controls.Add(this.sep7);
             this.panel8.Controls.Add(this.LnkRestoreColors);
             this.panel8.Controls.Add(this.LnkExportToExcel);
+            this.panel8.Controls.Add(this.sep11);
             this.panel8.Controls.Add(this.sep6);
             this.panel8.Controls.Add(this.LnkColorizeRows);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
@@ -1442,6 +1446,22 @@ namespace HAKROS.Forms
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(1101, 24);
             this.panel8.TabIndex = 100000016;
+            // 
+            // LnkAnalyzeRows
+            // 
+            this.LnkAnalyzeRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LnkAnalyzeRows.AutoSize = true;
+            this.LnkAnalyzeRows.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.LnkAnalyzeRows.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LnkAnalyzeRows.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.LnkAnalyzeRows.LinkColor = System.Drawing.Color.Gainsboro;
+            this.LnkAnalyzeRows.Location = new System.Drawing.Point(582, 7);
+            this.LnkAnalyzeRows.Name = "LnkAnalyzeRows";
+            this.LnkAnalyzeRows.Size = new System.Drawing.Size(131, 12);
+            this.LnkAnalyzeRows.TabIndex = 0;
+            this.LnkAnalyzeRows.TabStop = true;
+            this.LnkAnalyzeRows.Text = "Analyze selected rows..";
+            this.LnkAnalyzeRows.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkAnalyzeRows_LinkClicked);
             // 
             // tResults
             // 
@@ -1462,10 +1482,10 @@ namespace HAKROS.Forms
             this.LnkExportToText.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LnkExportToText.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.LnkExportToText.LinkColor = System.Drawing.Color.Gainsboro;
-            this.LnkExportToText.Location = new System.Drawing.Point(1020, 7);
+            this.LnkExportToText.Location = new System.Drawing.Point(1014, 7);
             this.LnkExportToText.Name = "LnkExportToText";
             this.LnkExportToText.Size = new System.Drawing.Size(81, 12);
-            this.LnkExportToText.TabIndex = 23;
+            this.LnkExportToText.TabIndex = 0;
             this.LnkExportToText.TabStop = true;
             this.LnkExportToText.Text = "Export to text..";
             this.LnkExportToText.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkExportResults_LinkClicked);
@@ -1475,7 +1495,7 @@ namespace HAKROS.Forms
             this.sep8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sep8.AutoSize = true;
             this.sep8.ForeColor = System.Drawing.Color.White;
-            this.sep8.Location = new System.Drawing.Point(1007, 7);
+            this.sep8.Location = new System.Drawing.Point(1002, 7);
             this.sep8.Name = "sep8";
             this.sep8.Size = new System.Drawing.Size(12, 13);
             this.sep8.TabIndex = 32;
@@ -1486,7 +1506,7 @@ namespace HAKROS.Forms
             this.sep7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sep7.AutoSize = true;
             this.sep7.ForeColor = System.Drawing.Color.White;
-            this.sep7.Location = new System.Drawing.Point(905, 7);
+            this.sep7.Location = new System.Drawing.Point(902, 7);
             this.sep7.Name = "sep7";
             this.sep7.Size = new System.Drawing.Size(12, 13);
             this.sep7.TabIndex = 32;
@@ -1503,7 +1523,7 @@ namespace HAKROS.Forms
             this.LnkRestoreColors.Location = new System.Drawing.Point(725, 7);
             this.LnkRestoreColors.Name = "LnkRestoreColors";
             this.LnkRestoreColors.Size = new System.Drawing.Size(87, 12);
-            this.LnkRestoreColors.TabIndex = 100000010;
+            this.LnkRestoreColors.TabIndex = 0;
             this.LnkRestoreColors.TabStop = true;
             this.LnkRestoreColors.Text = "Restore colors..";
             this.LnkRestoreColors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkRestoreColors_LinkClicked);
@@ -1516,20 +1536,31 @@ namespace HAKROS.Forms
             this.LnkExportToExcel.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LnkExportToExcel.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.LnkExportToExcel.LinkColor = System.Drawing.Color.Gainsboro;
-            this.LnkExportToExcel.Location = new System.Drawing.Point(918, 7);
+            this.LnkExportToExcel.Location = new System.Drawing.Point(914, 7);
             this.LnkExportToExcel.Name = "LnkExportToExcel";
             this.LnkExportToExcel.Size = new System.Drawing.Size(88, 12);
-            this.LnkExportToExcel.TabIndex = 35;
+            this.LnkExportToExcel.TabIndex = 0;
             this.LnkExportToExcel.TabStop = true;
             this.LnkExportToExcel.Text = "Export to excel..";
             this.LnkExportToExcel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkExportToExcel_LinkClicked);
+            // 
+            // sep11
+            // 
+            this.sep11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.sep11.AutoSize = true;
+            this.sep11.ForeColor = System.Drawing.Color.White;
+            this.sep11.Location = new System.Drawing.Point(713, 7);
+            this.sep11.Name = "sep11";
+            this.sep11.Size = new System.Drawing.Size(12, 13);
+            this.sep11.TabIndex = 100000009;
+            this.sep11.Text = "|";
             // 
             // sep6
             // 
             this.sep6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sep6.AutoSize = true;
             this.sep6.ForeColor = System.Drawing.Color.White;
-            this.sep6.Location = new System.Drawing.Point(813, 7);
+            this.sep6.Location = new System.Drawing.Point(812, 7);
             this.sep6.Name = "sep6";
             this.sep6.Size = new System.Drawing.Size(12, 13);
             this.sep6.TabIndex = 100000009;
@@ -1543,10 +1574,10 @@ namespace HAKROS.Forms
             this.LnkColorizeRows.Font = new System.Drawing.Font("Verdana", 6.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LnkColorizeRows.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.LnkColorizeRows.LinkColor = System.Drawing.Color.Gainsboro;
-            this.LnkColorizeRows.Location = new System.Drawing.Point(826, 7);
+            this.LnkColorizeRows.Location = new System.Drawing.Point(824, 7);
             this.LnkColorizeRows.Name = "LnkColorizeRows";
             this.LnkColorizeRows.Size = new System.Drawing.Size(78, 12);
-            this.LnkColorizeRows.TabIndex = 100000008;
+            this.LnkColorizeRows.TabIndex = 0;
             this.LnkColorizeRows.TabStop = true;
             this.LnkColorizeRows.Text = "Colorize row..";
             this.LnkColorizeRows.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LnkColorizeRows_LinkClicked);
@@ -2826,5 +2857,7 @@ namespace HAKROS.Forms
         private System.Windows.Forms.ToolStripMenuItem CMenuSafeboard;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator26;
         private System.Windows.Forms.ToolStripMenuItem Menu1_CreateDesktopShortcut;
+        internal System.Windows.Forms.LinkLabel LnkAnalyzeRows;
+        private System.Windows.Forms.Label sep11;
     }
 }
