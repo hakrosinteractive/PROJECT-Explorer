@@ -23,6 +23,9 @@ namespace HAKROS.Forms
 
         private int TotalFiles = 0;
 
+        private static string CurrentBranch = "";
+        private static string SelectedBranch = "";
+
         public FrmBackups()
         {
             InitializeComponent();
@@ -31,9 +34,8 @@ namespace HAKROS.Forms
         public void InitWindow()
         {
             LoadAutoBackupCfg();
-            DeleteEmptyFolders();
             LoadBranches(false);
-            CbBranches.Text = GetCurrentBranchDir();
+            UpdateBranches();
             LoadBackups(false);
             UpdateBackupTotal();
         }
@@ -43,8 +45,8 @@ namespace HAKROS.Forms
             Text = ClassGeneral.GetWindowTitle("Local Backup");
             Icon = ClassGeneral.GetIcon();
             SetWindowSize();
-            //InitWindow();
             tcontrol.Enabled = true;
+            DeleteEmptyFolders();
         }
 
         private void SetWindowSize()
@@ -165,7 +167,7 @@ namespace HAKROS.Forms
                 CbBranches.Items.Add(currentBranch);
             }
 
-            CbBranches.Text = (keepSelection) ? currentSelection : currentBranch;
+            CbBranches.Text = keepSelection ? currentSelection : currentBranch;
 
             if (CbBranches.SelectedIndex == -1)
             {
@@ -174,6 +176,12 @@ namespace HAKROS.Forms
 
             LoadingBranches = false;
 
+        }
+
+        private void UpdateBranches()
+        {
+            CurrentBranch = GetCurrentBranchDir().Replace("\\\\","\\");
+            SelectedBranch = GetSelectedBranchDir().Replace("\\\\", "\\");
         }
 
         private string GetCurrentBranchDir()
@@ -188,6 +196,7 @@ namespace HAKROS.Forms
 
         private void CbBranches_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateBranches();
             LoadBackups(false, false);
         }
 
@@ -207,7 +216,6 @@ namespace HAKROS.Forms
             try
             {
 
-                Enabled = false;
                 ListFiles.SuspendLayout();
 
                 var auxhash = "";
@@ -222,11 +230,9 @@ namespace HAKROS.Forms
 
                 TotalFiles = 0;
 
-                string branchDir = GetSelectedBranchDir();
+                Directory.CreateDirectory(SelectedBranch);
 
-                Directory.CreateDirectory(branchDir);
-
-                var di = new DirectoryInfo(branchDir);
+                var di = new DirectoryInfo(SelectedBranch);
 
                 var ds1 = di.GetDirectories("**", SearchOption.TopDirectoryOnly);
 
@@ -265,10 +271,10 @@ namespace HAKROS.Forms
                                 {
 
                                     var dname = Path.GetFileName(d2.FullName);
-                                    var root = branchDir;
+                                    var root = SelectedBranch;
                                     var hash = Path.GetFileName(Path.GetDirectoryName(d2.FullName));
 
-                                    var dirhash = branchDir + hash + "\\";
+                                    var dirhash = SelectedBranch + hash + "\\";
                                     var headerfile = dirhash + "header.data";
                                     var originalfilepath = "";
                                     if (File.Exists(headerfile))
@@ -350,7 +356,6 @@ namespace HAKROS.Forms
                 //Error !!
             }
 
-            Enabled = true;
             ListFiles.ResumeLayout();
 
         }
@@ -400,7 +405,7 @@ namespace HAKROS.Forms
         {
             try
             {
-                var dirhash = GetSelectedBranchDir() + GetHashRow(r) + "\\";
+                var dirhash = SelectedBranch + GetHashRow(r) + "\\";
                 var filelock = dirhash + "lock.lck";
                 if(status)
                 {
@@ -432,7 +437,7 @@ namespace HAKROS.Forms
             }
             if (r != -1)
             {
-                var dirhash = GetSelectedBranchDir() + GetHashRow(r) + "\\";
+                var dirhash = SelectedBranch + GetHashRow(r) + "\\";
                 var filelock = dirhash + "lock.lck";
                 return File.Exists(filelock);
             }
@@ -443,7 +448,7 @@ namespace HAKROS.Forms
         {
             if(hash != "")
             {
-                var dirhash = GetSelectedBranchDir() + hash + "\\";
+                var dirhash = SelectedBranch + hash + "\\";
                 var filelock = dirhash + "lock.lck";
                 if(File.Exists(filelock))
                 {
@@ -505,7 +510,7 @@ namespace HAKROS.Forms
 
                 var currentFilename = GetCurrentFileName();
 
-                var dirhash = GetSelectedBranchDir() + GetCurrentHash() + "\\";
+                var dirhash = SelectedBranch + GetCurrentHash() + "\\";
 
                 var dir = dirhash + currentFilename + "\\";
 
@@ -683,7 +688,7 @@ namespace HAKROS.Forms
         {
             if (ListFilesSelectedIndex() != -1)
             {
-                var dir = GetSelectedBranchDir() + GetCurrentHash() + "\\";
+                var dir = SelectedBranch + GetCurrentHash() + "\\";
                 var headerfile = dir + "header.data";
                 if(File.Exists(headerfile))
                 {
@@ -719,7 +724,6 @@ namespace HAKROS.Forms
 
         private void FrmBackups_Activated(object sender, EventArgs e)
         {
-            RefreshList(true);
             tcontrol.Enabled = true;
         }
 
@@ -744,7 +748,7 @@ namespace HAKROS.Forms
             {
                 if (MessageBox.Show("Do you want to delete selected backup?", "Notice", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    var dir = GetSelectedBranchDir() + GetCurrentHash() + "\\";
+                    var dir = SelectedBranch + GetCurrentHash() + "\\";
                     if (Directory.Exists(dir))
                     {
                         try
@@ -803,7 +807,7 @@ namespace HAKROS.Forms
             {
                 if (!IsRowLocked(r))
                 {
-                    var dir = GetSelectedBranchDir() + GetHashRow(r) + "\\";
+                    var dir = SelectedBranch + GetHashRow(r) + "\\";
                     if (Directory.Exists(dir))
                     {
                         try
@@ -842,7 +846,7 @@ namespace HAKROS.Forms
             {
                 if (!IsRowLocked(r))
                 {
-                    var dir = GetSelectedBranchDir() + GetHashRow(r) + "\\";
+                    var dir = SelectedBranch + GetHashRow(r) + "\\";
                     if (Directory.Exists(dir))
                     {
                         try
@@ -1046,12 +1050,13 @@ namespace HAKROS.Forms
             return ChbStatus.Checked;
         }
 
+
+
         public void BackupFile(string currentfile)
         {
             try
             {
-                string branchDir = GetCurrentBranchDir();
-                Directory.CreateDirectory(branchDir);
+                Directory.CreateDirectory(CurrentBranch);
                 if (File.Exists(currentfile))
                 {
                     var originalCaseFile = currentfile;
@@ -1064,7 +1069,7 @@ namespace HAKROS.Forms
                         var timestamp = ClassBackup.GetTimeStamp(DateTime.Now);
                         var fileName = Path.GetFileName(originalCaseFile);
 
-                        var dhash = branchDir.ToLowerInvariant() + currenthash + "\\";
+                        var dhash = CurrentBranch.ToLowerInvariant() + currenthash + "\\";
                         var dbackup = dhash + fileName + "\\";
 
                         var headerfile = dhash + "header.data";
@@ -1080,13 +1085,11 @@ namespace HAKROS.Forms
                             wr.WriteLine(originalCaseFile);
                             wr.WriteLine(currenthash);
                             wr.Close();
-                            Application.DoEvents();
                         }
 
                         var di = new DirectoryInfo(dir);
                         var fs = di.GetFiles("*.*", SearchOption.TopDirectoryOnly);
                         var orderedFiles = fs.OrderBy(f => f.LastWriteTime).ToList();
-                        Application.DoEvents();
                         if (orderedFiles.Count > 0)
                         {
                             var lastbackup = orderedFiles[orderedFiles.Count - 1].FullName;
@@ -1101,7 +1104,6 @@ namespace HAKROS.Forms
                                     fi.Attributes = FileAttributes.Normal;
                                 }
                                 File.Copy(currentfile, backupfile, true);
-                                Application.DoEvents();
                                 if (Visible)
                                 {
                                     RefreshList(true);
@@ -1113,7 +1115,6 @@ namespace HAKROS.Forms
                         else
                         {
                             File.Copy(currentfile, backupfile, true);
-                            Application.DoEvents();
                             if (Visible)
                             {
                                 RefreshList(true);
